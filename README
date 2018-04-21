@@ -1,0 +1,35 @@
+Im src-Ordner befinden sich die Java-Dateien für das Demonstrationsprogamm zur Projektvergabe:
+
+    Projektvergabe.java:  Hauptprogramm mit graphischer Benutzeroberfläche
+
+    Student.java: Klasse für studentische Daten
+    Stud.java:    Klasse mit anonymisierten Daten
+
+    Project,java: Klasse für Projektdaten
+    Proj.java:    Klasse mit anonymisierten Daten
+    
+    Graph.java:   Klasse zur Darstellung von Graphen und Bereitstellung des Dijkstra-Algorithmus
+    PNode.java:   Klasse zur Darstellung von Projekten als Knoten eines Graphen
+    SNode.java:   Klasse zur Darstellung von Studenten als Knoten eines Graphen
+    
+    
+ Hinweise:
+ 
+    Im Hauptprogramm (Methode main) sind folgende Dateipfade festgelegt:
+        final String projectsFilename=      "/home/ruelling/.../projects.txt";
+        final String studentsFilename=      "/home/ruelling/.../students.txt";
+        final String studentsFilename_out=  "/home/ruelling/.../students_out.txt";
+    Diese Pfade müssen durch korrekte Pfade auf dem jeweiligen Rechner ersetzt werden!
+    
+    
+ Im data-Ordner befinden sich die Beispiel-Dateien projects.txt und students.txt
+ Die Datei students_out.txt wird vom Programm mit "export" erzeugt.
+ Wenn man beispielsweise einen Verweis von students_out.txt" auf "students.txt" anlegt,
+ erreicht man dass jeweils die zuletzt generierten Ausgaben beim nächsten Programmstart
+ als Eingaben genutzt werden.
+ 
+ 
+ 
+      
+        
+        
