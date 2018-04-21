@@ -334,7 +334,7 @@ class Projektvergabe {
       final String studentsFilename_out="C:/Users/ruelling/Desktop/ProjektvergabeProjekt/students_out.txt";
 */
       final String projectsFilename=    "data/projects.txt";
-      final String studentsFilename=    "data/test_fritz/students.txt";
+      final String studentsFilename=    "data/students.txt";
       final String studentsFilename_out="out/students_out.txt";
    
       final Project[] projects= readProjectsFromFile(projectsFilename);
