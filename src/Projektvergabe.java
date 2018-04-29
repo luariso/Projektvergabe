@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.io.*;
-
+import java.util.List;
 
 
 class Projektvergabe {
@@ -678,7 +678,8 @@ class Projektvergabe {
                // Umkopieren der Studenten in anonymisierte Objekte
                boolean debugmode=false;
                ArrayList<SNode> sNodes = new ArrayList<SNode>();
-               for (Student s:students){
+               List<Student> randomizedStudents = randomizeList(Arrays.asList(students));
+               for (Student s: randomizedStudents){
                   ArrayList<Integer> satisfactions= new ArrayList<Integer>(s.getSatisfactions().length);
                   for (int i=0; i<s.getSatisfactions().length; ++i) {
                      if (debugmode) {
@@ -826,4 +827,25 @@ class Projektvergabe {
             }
       });
   }
+
+    private static <T> List<T> randomizeList(List<T> list) {
+        List<Integer> indices = new LinkedList<>();
+
+        for (T t: list) {
+            indices.add(list.indexOf(t));
+        }
+
+        List<T> result = new ArrayList<>();
+        Random random = new Random();
+        int nextIndex, nextRandom;
+
+        for (int i = 0; i < list.size(); ++i) {
+            nextRandom = random.nextInt(indices.size());
+            nextIndex = indices.get(nextRandom);
+            result.add(list.get(nextIndex));
+            indices.remove(nextRandom);
+        }
+
+        return result;
+    }
 }
