@@ -11,13 +11,19 @@ import java.util.Map;
  */
 public class TestStudentFileProvider {
     private static final String projectFileName = "data/projects.txt";
-    private static final String outputFileName = "data/test_fritz/students.txt";
+    private static final String outputFilePrefix = "data/testfiles/students";
+    private static String outputFileName;
 
     public static void main(String[] args) {
+        createFile_worstCase();
+        createFile_veryBadCase();
         createFile_badCase();
+        createFile_neutralCase();
+        createFile_randomCase_1();
     }
 
     public static void createFile_worstCase() {
+        outputFileName = outputFilePrefix + "_worst_case.txt";
         Project[] projects = Projektvergabe.readProjectsFromFile(projectFileName);
 
         Map<Project, Integer> preferredRankings = new LinkedHashMap<>();
@@ -39,6 +45,7 @@ public class TestStudentFileProvider {
     }
 
     public static void createFile_veryBadCase() {
+        outputFileName = outputFilePrefix + "_very_bad_case.txt";
         Project[] projects = Projektvergabe.readProjectsFromFile(projectFileName);
 
         Map<Project, Integer> preferredRankings = new LinkedHashMap<>();
@@ -60,6 +67,7 @@ public class TestStudentFileProvider {
     }
 
     public static void createFile_badCase() {
+        outputFileName = outputFilePrefix + "_bad_case.txt";
         Project[] projects = Projektvergabe.readProjectsFromFile(projectFileName);
 
         Map<Project, Integer> preferredRankings = new LinkedHashMap<>();
@@ -81,6 +89,7 @@ public class TestStudentFileProvider {
     }
 
     public static void createFile_neutralCase() {
+        outputFileName = outputFilePrefix + "_neutral_case.txt";
         Project[] projects = Projektvergabe.readProjectsFromFile(projectFileName);
 
         Map<Project, Integer> preferredRankings = new LinkedHashMap<>();
@@ -102,6 +111,7 @@ public class TestStudentFileProvider {
     }
 
     public static void createFile_randomCase_1() {
+        outputFileName = outputFilePrefix + "_random_case_1.txt";
         Project[] projects = Projektvergabe.readProjectsFromFile(projectFileName);
 
         Map<Project, Integer> preferredRankings = new LinkedHashMap<>();
