@@ -11,6 +11,7 @@ public class Verwaltung {
 	private static Persistenz persistenz = new PersistenzTextDateien();
 	private static GUI gui = new GUI();
 	
+	//
 	public static void main(String[] args){
 		gui.oeffne();
 		
