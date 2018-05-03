@@ -1,0 +1,6 @@
+# Ignore IDEA files
+*.iml
+.idea/*
+
+# Ignore artifacts
+out/*
