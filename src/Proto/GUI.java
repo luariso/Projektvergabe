@@ -67,14 +67,14 @@ public class GUI{
 		JButton zuweisung = new JButton("Zuweisung");
 		zuweisung.addActionListener(e -> {
 			Verwaltung.ordne();
+			zuweisung.setEnabled(false);
 			studentenPanel.remove(studentenTabelle);
 			studentenTabelle = getTabelle(studentenUeberschriften, Verwaltung.present("matching"));
 			studentenPanel.add(studentenTabelle);
-			studentenPanel.repaint();
 			projektPanel.remove(projektTabelle);
 			projektTabelle = getTabelle(projektUeberschriften, Verwaltung.present("projekte"));
 			projektPanel.add(projektTabelle);
-			projektPanel.repaint();
+			frame.repaint();
 		});
 		zuweisung.setEnabled(false);
 		projektToolBar.add(zuweisung);
@@ -87,7 +87,7 @@ public class GUI{
 			studentenPanel.remove(studentenTabelle);
 			studentenTabelle = getTabelle(studentenUeberschriften, Verwaltung.present("matching"));
 			studentenPanel.add(studentenTabelle);
-			studentenPanel.repaint();
+			frame.repaint();
 		});
 		importiereStudenten.setEnabled(false);
 		studentenToolBar.add(importiereStudenten);
@@ -99,7 +99,7 @@ public class GUI{
 			projektPanel.remove(projektTabelle);
 			projektTabelle = getTabelle(projektUeberschriften, Verwaltung.present("projekte"));
 			projektPanel.add(projektTabelle);
-			projektPanel.repaint();
+			frame.repaint();
 		});
 		projektToolBar.add(importiereProjekte);
 		
