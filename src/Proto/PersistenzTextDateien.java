@@ -5,7 +5,7 @@ import java.util.*;
 
 public class PersistenzTextDateien implements Persistenz{
 
-	private String pfad = "D:/Mega/hfu/s4/AlgoPro/data/";
+	private String pfad = "data/";
 
 	public Collection<Student> importiereStudenten() {
 		Collection<Student> ergebnis = new ArrayList<>();

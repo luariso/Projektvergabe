@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 
-public class GUI{
+public class SwingGUI{
 	
 	private JFrame frame = getFenster();
 	private JPanel studentenPanel = new JPanel(new BorderLayout());
@@ -31,6 +31,7 @@ public class GUI{
 			}
 //			if(width > 300)
 //				width=300;
+			width = Math.max(new JLabel(tabelle.getColumnName(column)).getPreferredSize().width + 1, width);
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
 		return new JScrollPane(tabelle);
@@ -40,7 +41,7 @@ public class GUI{
 		JFrame ergebnis = new JFrame("Projektvergabe");
 		ergebnis.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		ergebnis.setLocationByPlatform(true);
-//		ergebnis.setPreferredSize(new Dimension(1000, 300));
+		ergebnis.setPreferredSize(new Dimension(700, 400));
 		ergebnis.setResizable(false);
 		try{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

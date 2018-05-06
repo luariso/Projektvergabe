@@ -9,7 +9,7 @@ public class Verwaltung {
 	private static ArrayList<PNode> pNodes;
 	private static ArrayList<SNode> sNodes;
 	private static Persistenz persistenz = new PersistenzTextDateien();
-	private static GUI gui = new GUI();
+	private static SwingGUI gui = new SwingGUI();
 	
 	public static void main(String[] args){
 		gui.oeffne();
