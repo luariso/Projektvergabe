@@ -17,10 +17,6 @@ public class Projekt {
 		this.maxTeilnehmer = maxTeilnehmer;
 	}
 	
-	public int getId(){
-		return id;
-	}
-	
 	@Override
 	public String toString(){
 		return this.id +
@@ -30,10 +26,15 @@ public class Projekt {
 	}
 	
 	//Erstellt eine PNode aus dem Projekt und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind
+	
 	public PNode makePNode(int id){
 		this.pNode = new PNode(id, this.maxTeilnehmer - this.teilnehmer.size());
 		this.pNode.setProjekt(this);
 		return this.pNode;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 	public PNode getPNode(){
@@ -44,15 +45,27 @@ public class Projekt {
 		return titel;
 	}
 	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public void setTitel(String titel){
+		this.titel = titel;
+	}
+	
+	public void setMaxTeilnehmer(int maxTeilnehmer){
+		this.maxTeilnehmer = maxTeilnehmer;
+	}
+	
+	public int getMaxTeilnehmer(){
+		return maxTeilnehmer;
+	}
+	
 	public void addTeilnehmer(Student s){
 		if(teilnehmer.contains(s)){
 			throw new IllegalArgumentException("Der Student " + s + " ist bereits Teilnehmer dieses Projekts.");
 		}
 		teilnehmer.add(s);
-	}
-	
-	public int getMaxTeilnehmer(){
-		return maxTeilnehmer;
 	}
 	
 	public ArrayList<Student> getTeilnehmer(){

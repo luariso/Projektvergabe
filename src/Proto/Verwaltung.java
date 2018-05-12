@@ -12,8 +12,8 @@ public class Verwaltung {
 	private static SwingGUI gui = new SwingGUI();
 	
 	public static void main(String[] args){
-		gui.oeffne();
-		
+		importiereProjekte();
+		JavaFXGUI.oeffne(args);
 	}
 	
 	public static void importiereProjekte(){
@@ -138,4 +138,7 @@ public class Verwaltung {
 		throw new IllegalArgumentException("Gueltige Argumente sind 'studenten', 'matching' und 'projekte'");
 	}
 	
+	public static Collection<Projekt> getProjekte(){
+		return projekte;
+	}
 }

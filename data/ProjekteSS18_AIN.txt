@@ -1,16 +1,16 @@
 1	6	A01 Evaluation des OWASP Zed Attack Proxy (ZAP)	
-2	6	A02 Entwicklung einer mobilen App für Analytics Based Offers	
-3	6	A03 Telemetrie für ein inverses Pendel	
+2	6	A02 Entwicklung einer mobilen App fÃ¼r Analytics Based Offers
+3	6	A03 Telemetrie fÃ¼r ein inverses Pendel
 4	5	A04 FHFTrain	
 5	5	A05 HoloLens	
 6	4	A06 Multikopter	
-7	4	A07 App für die Parametrierung eines EC-Motors	
+7	4	A07 App fÃ¼r die Parametrierung eines EC-Motors
 8	4	A08 Leitfaden im Kontext von Business Intelligence und Advanced Analytics	
 9	3	AI01 Mobile Payment - multifunktionale Chipkartensysteme - biometrische Authentifizierungsmethoden	
-10	5	AI02 Mobile Kommunikation für Bürger	
+10	5	AI02 Mobile Kommunikation fÃ¼r BÃ¼rger
 11	4	AI03 Druckeranwendung unter Android	
 12	4	AI04 Umgebungserfassung mit LIDAR und Turtlebot-2	
-13	4	AI05 Plattform für Nao2Nao-Interaktionen	
-14	2	AI06 Qualitätsanalyse & -vorhersage mit Neuronalen Netzen von Komponenten des Weinschorleautomaten	
-15	3	AI07 Effiziente und robuste IoTCloud-Verbindung für ein IoT-Gateway	
+13	4	AI05 Plattform fÃ¼r Nao2Nao-Interaktionen
+14	2	AI06 QualitÃ¤tsanalyse & -vorhersage mit Neuronalen Netzen von Komponenten des Weinschorleautomaten
+15	3	AI07 Effiziente und robuste IoTCloud-Verbindung fÃ¼r ein IoT-Gateway
 16	4	AI08 Einsatz von Matching-Algorithmen zur Projektvergabe	
