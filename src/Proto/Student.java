@@ -24,31 +24,29 @@ public class Student extends Nutzer {
 	
 	@Override
 	public String toString(){
-		String ergebnis = this.id +
-				" " + this.name + " " +
-				" " + this.vorname + " " +
-				" " + bewertungen;
+		String ergebnis = this.vorname + " " +
+				" " + this.name;
 //		if(this.sNode != null){
 //			ergebnis += " " + this.sNode.getId();
 //		}
-		if(this.projekt != null){
-			ergebnis += " " + this.projekt.getTitel() +
-					" " + this.getZufriedenheit();
-			
-		}
-		ergebnis += '\n';
+//		if(this.projekt != null){
+//			ergebnis += " " + this.projekt.getTitel() +
+//					" " + this.getZufriedenheit();
+//
+//		}
+//		ergebnis += '\n';
 		return ergebnis;
 	}
 	
 	//Erstellt eine SNode aus dem Student und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind
 	public SNode makeSNode(int id){
-		this.sNode = new SNode(id, getBewertungen());
+		this.sNode = new SNode(id, getBewertungsNoten());
 		this.sNode.setStudent(this);
 		return this.sNode;
 	}
 	
 	//Erstellt eine nach den IDs der PNodes geordnete Liste von Noten aus den vorhandenen Bewertungen
-	public ArrayList<Integer> getBewertungen(){
+	public ArrayList<Integer> getBewertungsNoten(){
 		ArrayList<Integer> ergebnis = new ArrayList<>();
 		for(int i = 0; i < bewertungen.size(); ++i){
 			for(Bewertung b : bewertungen){
@@ -58,6 +56,10 @@ public class Student extends Nutzer {
 			}
 		}
 		return schliesseLuecken(ergebnis);
+	}
+	
+	public ArrayList<Bewertung> getBewertungen(){
+		return bewertungen;
 	}
 	
 	public void setProjekt(Projekt projekt){
@@ -102,7 +104,7 @@ public class Student extends Nutzer {
 		return this.bewertungen.get(this.projekt.getId()).getNote();
 	}
 	
-	public int getID(){
+	public int getId(){
 		return id;
 	}
 	

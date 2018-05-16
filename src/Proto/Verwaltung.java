@@ -6,6 +6,7 @@ public class Verwaltung {
 
 	private static Collection<Projekt> projekte = new ArrayList<>();
 	private static Collection<Student> studenten = new ArrayList<>();
+	
 	private static ArrayList<PNode> pNodes;
 	private static ArrayList<SNode> sNodes;
 	private static Persistenz persistenz = new PersistenzTextDateien();
@@ -13,6 +14,7 @@ public class Verwaltung {
 	
 	public static void main(String[] args){
 		importiereProjekte();
+		importiereStudenten();
 		JavaFXGUI.oeffne(args);
 	}
 	
@@ -41,6 +43,15 @@ public class Verwaltung {
 			}
 		}
 		throw new NullPointerException("Es existiert kein Projekt mit der ID " + key);
+	}
+	
+	public static Student getStudent(int key){
+		for(Student s: studenten){
+			if(key == s.getId()){
+				return s;
+			}
+		}
+		throw new NullPointerException("Es existiert kein Student mit der ID " + key);
 	}
 	
 	//Erstellt eine Liste von PNodes aus den vorhandenen Projekten mit zufälliger Reihenfolge
@@ -104,8 +115,8 @@ public class Verwaltung {
 			case "studenten":
 				ergebnis = new Object[studenten.size()][4];
 				for(Student s : studenten){
-					int i = s.getID();
-					ergebnis[i][0] = s.getID();
+					int i = s.getId();
+					ergebnis[i][0] = s.getId();
 					ergebnis[i][1] = s.getVorname();
 					ergebnis[i][2] = s.getName();
 					ergebnis[i][3] = s.getMatrikelNummer();
@@ -114,8 +125,8 @@ public class Verwaltung {
 			case "matching":
 				ergebnis = new Object[studenten.size()][6];
 				for(Student s : studenten){
-						int i = s.getID();
-						ergebnis[i][0] = s.getID();
+						int i = s.getId();
+						ergebnis[i][0] = s.getId();
 						ergebnis[i][1] = s.getVorname();
 						ergebnis[i][2] = s.getName();
 						ergebnis[i][3] = s.getMatrikelNummer();
@@ -140,5 +151,9 @@ public class Verwaltung {
 	
 	public static Collection<Projekt> getProjekte(){
 		return projekte;
+	}
+	
+	public static Collection<Student> getStudenten(){
+		return studenten;
 	}
 }
