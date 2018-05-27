@@ -1,3 +1,4 @@
+package demo_ruelling;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class Graph {
 
         studentData = sList;
         if (debugmode) {
-          System.out.print("Graph: studentData=");
+          System.out.print("demo_ruelling.Graph: studentData=");
           for (SNode s:studentData)
              System.out.print(" " + s.getId());
           System.out.println();
@@ -35,7 +36,7 @@ public class Graph {
            }   
         }   
         if (debugmode) {
-          System.out.print("Graph: Jobs=");
+          System.out.print("demo_ruelling.Graph: Jobs=");
           for (Job j:jobData)
              System.out.print(" " + j.getProjectId());
           System.out.println();

@@ -1,12 +1,14 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package demo_ruelling.test_utils;
+
+import demo_ruelling.Project;
+import demo_ruelling.Projektvergabe;
+
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Creates Student.txt files for different test cases.
+ * Creates demo_ruelling.Student.txt files for different test cases.
  * These test cases are based on the original projects.txt!
  */
 public class TestStudentFileProvider {

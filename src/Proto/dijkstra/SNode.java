@@ -1,4 +1,6 @@
-package Proto;
+package Proto.dijkstra;
+
+import Proto.domain.Student;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ public class SNode{                           // Anonymisierte Studenten-Daten
    
 //   @Override
 //   public String toString(){
-//      return "SNode{" +
+//      return "dSNode{" +
 //              "id=" + id +
 //              ", satisfactions=" + satisfactions +
 //              "}\n";

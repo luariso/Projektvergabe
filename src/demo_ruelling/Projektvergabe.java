@@ -1,3 +1,5 @@
+package demo_ruelling;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -5,7 +7,7 @@ import java.io.*;
 import java.util.List;
 
 
-class Projektvergabe {
+public class Projektvergabe {
    static Label       labelStudentId;
    static Label       labelStudentName;
 
@@ -35,7 +37,7 @@ class Projektvergabe {
    // -----------------------------------------------------------------------
    // Einlesen aller Projekte
    // -----------------------------------------------------------------------
-   static Project[] readProjectsFromFile(String filename) {
+   public static Project[] readProjectsFromFile(String filename) {
       // Read available projects from file and return them in an array
 
       TreeMap<Integer, Project> tm= new TreeMap<Integer, Project>();
@@ -345,7 +347,7 @@ class Projektvergabe {
 
 
       // Ergebnisse des Vergabeverfahrens
-      MatchingResult = new Integer[number_of_students];   // zugewiesenes Projekt pro Student
+      MatchingResult = new Integer[number_of_students];   // zugewiesenes Projekt pro demo_ruelling.Student
       // Die dazugehörige studentische Bewertungen sat eines Studenten s erhält man durch
       // p = MatchingResult[s-1];
       // sat = students[s-1].getSatisfaction[p-1];
@@ -370,7 +372,7 @@ class Projektvergabe {
 
 
 
-      final Frame frame = new Frame ("Projektvergabe");
+      final Frame frame = new Frame ("demo_ruelling.Projektvergabe");
       frame.setLayout(null);
 
 
@@ -694,14 +696,14 @@ class Projektvergabe {
                        System.out.println();
                      }
                   }
-                  System.out.println("Kontrollausgabe: Student=" + s.getId() + " sat=" + satisfactions);
+                  System.out.println("Kontrollausgabe: demo_ruelling.Student=" + s.getId() + " sat=" + satisfactions);
                   sNodes.add(/* s.getId(),*/  new SNode(s.getId(), satisfactions));
                }
 
                // Umkopieren der Projeke in anonymisierte Objekte
                ArrayList<PNode> pNodes = new ArrayList<PNode>(); 
                for (Project p: projects) {
-                  //System.out.println("Kontrollausgabe: Project=" + p.getId() + " capacity=" + p.getCapacity());
+                  //System.out.println("Kontrollausgabe: demo_ruelling.Project=" + p.getId() + " capacity=" + p.getCapacity());
                   pNodes.add(new PNode(p.getId(), p.getCapacity()));
                   //System.out.println("Kontrollausgabe: pNodes.size=" + pNodes.size());
                }
@@ -719,7 +721,7 @@ class Projektvergabe {
                   MatchingResult[s-1]= p;
                }
 
-               System.out.println("\nProjektvergabe:");
+               System.out.println("\ndemo_ruelling.Projektvergabe:");
                for (Integer s:matching.keySet())
                   System.out.println(students[s-1].getName() + ", " +students[s-1].getName2() + "  -->   " + projects[matching.get(s)-1].toString());  
 

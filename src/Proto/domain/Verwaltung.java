@@ -1,11 +1,20 @@
-package Proto;
+package Proto.domain;
 
+import Proto.dijkstra.Graph;
+import Proto.dijkstra.PNode;
+import Proto.dijkstra.Projekt;
+import Proto.dijkstra.SNode;
+import Proto.gui.fx.MainWindow;
+import Proto.gui.swing.SwingGUI;
+import Proto.persistence.Persistenz;
+import Proto.persistence.PersistenzTextDateien;
 import java.util.*;
 
 public class Verwaltung {
 
 	private static Collection<Projekt> projekte = new ArrayList<>();
 	private static Collection<Student> studenten = new ArrayList<>();
+	private static Collection<Verantwortlicher> supervisors = new ArrayList<>();
 	
 	private static ArrayList<PNode> pNodes;
 	private static ArrayList<SNode> sNodes;
@@ -15,7 +24,8 @@ public class Verwaltung {
 	public static void main(String[] args){
 		importiereProjekte();
 		importiereStudenten();
-		JavaFXGUI.oeffne(args);
+//		JavaFXGUI.oeffne(args);
+		MainWindow.oeffne(args);
 	}
 	
 	public static void importiereProjekte(){
@@ -104,7 +114,6 @@ public class Verwaltung {
 			pNodes.get(zuordnung.get(i)).getProjekt().addTeilnehmer(sNodes.get(i).getStudent());
 		}
 		
-		
 		return zuordnung;
 	}
 	
@@ -155,5 +164,9 @@ public class Verwaltung {
 	
 	public static Collection<Student> getStudenten(){
 		return studenten;
+	}
+
+	public static Collection<Verantwortlicher> getSupervisors(){
+		return supervisors;
 	}
 }

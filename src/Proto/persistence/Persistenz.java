@@ -1,4 +1,7 @@
-package Proto;
+package Proto.persistence;
+
+import Proto.dijkstra.Projekt;
+import Proto.domain.Student;
 
 import java.util.*;
 

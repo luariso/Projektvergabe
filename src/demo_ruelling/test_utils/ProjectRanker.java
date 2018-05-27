@@ -1,7 +1,7 @@
+package demo_ruelling.test_utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import demo_ruelling.Project;
+
 import java.util.*;
 
 /**
@@ -53,7 +53,7 @@ public class ProjectRanker {
 
         for (int i = 0; i < students; ++i) {
             builder.append(i + 1).append(" ")
-                    .append("Student")/*.append(i + 1)*/.append(" ")
+                    .append("demo_ruelling.Student")/*.append(i + 1)*/.append(" ")
                     .append("Test").append(" ")
                     .append((i + 1) * 10000).append(" ");
 

@@ -1,4 +1,7 @@
-package Proto;
+package Proto.dijkstra;
+
+import Proto.domain.Student;
+import Proto.domain.Verantwortlicher;
 
 import java.util.*;
 

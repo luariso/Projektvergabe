@@ -1,11 +1,13 @@
-package Proto;
+package Proto.gui.swing;
+
+import Proto.domain.Verwaltung;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 
 public class SwingGUI{
-	
+
 	private JFrame frame = getFenster();
 	private JPanel studentenPanel = new JPanel(new BorderLayout());
 	private JPanel projektPanel = new JPanel(new BorderLayout());
@@ -18,7 +20,7 @@ public class SwingGUI{
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	public JScrollPane getTabelle(String[] reihenNamen, Object[][] daten){
 		JTable tabelle = new JTable(daten, reihenNamen);
 		final TableColumnModel columnModel = tabelle.getColumnModel();
@@ -36,7 +38,7 @@ public class SwingGUI{
 		}
 		return new JScrollPane(tabelle);
 	}
-	
+
 	public JFrame getFenster(){
 		JFrame ergebnis = new JFrame("Projektvergabe");
 		ergebnis.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -54,17 +56,17 @@ public class SwingGUI{
 		}
 		return ergebnis;
 	}
-	
+
 	public JTabbedPane getMenu(){
 		JTabbedPane ergebnis = new JTabbedPane();
-		
+
 		JToolBar studentenToolBar = new JToolBar();
 		studentenToolBar.setFloatable(false);
 		studentenToolBar.setMargin(new Insets(0,3,0,3));
-		
+
 		JToolBar projektToolBar = new JToolBar();
 		projektToolBar.setFloatable(false);
-		
+
 		JButton zuweisung = new JButton("Zuweisung");
 		zuweisung.addActionListener(e -> {
 			Verwaltung.ordne();
@@ -80,7 +82,7 @@ public class SwingGUI{
 		zuweisung.setEnabled(false);
 		projektToolBar.add(zuweisung);
 		studentenToolBar.add(zuweisung);
-		
+
 		JButton importiereStudenten = new JButton("importiere Studenten");
 		importiereStudenten.addActionListener( e -> {
 			Verwaltung.importiereStudenten();
@@ -92,7 +94,7 @@ public class SwingGUI{
 		});
 		importiereStudenten.setEnabled(false);
 		studentenToolBar.add(importiereStudenten);
-		
+
 		JButton importiereProjekte = new JButton("importiere Projekte");
 		importiereProjekte.addActionListener( e -> {
 			Verwaltung.importiereProjekte();
@@ -103,16 +105,16 @@ public class SwingGUI{
 			frame.repaint();
 		});
 		projektToolBar.add(importiereProjekte);
-		
+
 		studentenPanel.add(studentenToolBar, BorderLayout.PAGE_START);
 		studentenPanel.add(studentenTabelle, BorderLayout.PAGE_END);
-		
+
 		projektPanel.add(projektToolBar, BorderLayout.PAGE_START);
 		projektPanel.add(projektTabelle,  BorderLayout.PAGE_END);
-		
+
 		ergebnis.addTab("Studenten", studentenPanel);
 		ergebnis.addTab("Projekte", projektPanel);
-		
+
 		return ergebnis;
 	}
 }

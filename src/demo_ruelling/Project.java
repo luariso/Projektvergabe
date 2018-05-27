@@ -1,3 +1,5 @@
+package demo_ruelling;
+
 public class Project {
 
     private Integer id;

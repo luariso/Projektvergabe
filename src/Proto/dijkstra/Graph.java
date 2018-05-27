@@ -1,4 +1,4 @@
-package Proto;
+package Proto.dijkstra;
 
 import java.util.*;
 
@@ -210,7 +210,7 @@ public class Graph{
 
 
 
-    TreeMap<Integer,Integer> getMatching() {
+    public TreeMap<Integer,Integer> getMatching() {
     	boolean debugMode=false;
         TreeMap<Integer,Integer> result= new TreeMap<>();
         for (Node u:matching.pairs.keySet()) {

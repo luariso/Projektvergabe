@@ -1,5 +1,8 @@
-package Proto;
+package Proto.gui.fx;
 
+import Proto.domain.Bewertung;
+import Proto.domain.Student;
+import Proto.domain.Verwaltung;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,45 +15,44 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class JavaFXGUI extends Application {
-	
+
 	public static void oeffne(String[] args){
 		launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		BorderPane mainLayout = new BorderPane();
 		Scene mainScene = new Scene(mainLayout);
-		
+
 		primaryStage.setTitle("Projektvergabe");
 		primaryStage.setScene(mainScene);
 		mainLayout.setCenter(getBewertungsScene(Verwaltung.getStudent(0)));
 		mainLayout.setRight(getStudentenScene());
-		
+
 		primaryStage.sizeToScene();
-		
+
 		primaryStage.show();
 	}
-	
+
 	public Pane getBewertungsScene(Student s){
 		BorderPane layout = new BorderPane();
-		
+
 		TableView<Bewertung> tabelle = new TableView<>();
-		
+
 		TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
-		
+
 		TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
 		bewertungCol.setCellFactory((param) -> new RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
 		bewertungCol.setCellValueFactory(new PropertyValueFactory<>("note"));
-		
+
 		tabelle.setItems(FXCollections.observableArrayList(s.getBewertungen()));
 		tabelle.getColumns().addAll(idCol, bewertungCol);
-		
+
 		Label ueberschrift = new Label("Die Bewertungen von " + s);
 		ueberschrift.setPadding(new Insets(5, 5, 5, 5));
 		layout.setTop(ueberschrift);
@@ -58,7 +60,7 @@ public class JavaFXGUI extends Application {
 		layout.setMinWidth(450);
 		return layout;
 	}
-	
+
 	public static class RadioButtonCell<S, T> extends TableCell<S, T>{
 		private T[] choices;
 		public RadioButtonCell(T[] choices){
@@ -71,7 +73,7 @@ public class JavaFXGUI extends Application {
 				HBox hb = new HBox(7);
 				hb.setAlignment(Pos.CENTER);
 				final ToggleGroup group = new ToggleGroup();
-				
+
 				for(T t : choices){
 					RadioButton radioButton = new RadioButton();
 					radioButton.setUserData(t);
@@ -81,9 +83,9 @@ public class JavaFXGUI extends Application {
 						radioButton.setSelected(true);
 					}
 				}
-				
+
 				group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-					
+
 					@SuppressWarnings("unchecked")
 					@Override
 					public void changed(ObservableValue<? extends Toggle> observable,
@@ -96,13 +98,13 @@ public class JavaFXGUI extends Application {
 			}
 		}
 	}
-	
+
 	public Pane getStudentenScene(){
 		BorderPane layout = new BorderPane();
-		
+
 		TableView<Student> tableView = new TableView<>();
 		tableView.setEditable(true);
-		
+
 		TableColumn<Student, String> idCol = new TableColumn<>("ID");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		TableColumn<Student, String> vornameCol = new TableColumn<>("Vorname");
@@ -111,10 +113,10 @@ public class JavaFXGUI extends Application {
 		nachnameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 		TableColumn<Student, String> matrikelCol = new TableColumn<>("Matrikelnummer");
 		matrikelCol.setCellValueFactory(new PropertyValueFactory<>("matrikelNummer"));
-		
+
 		tableView.setItems(FXCollections.observableArrayList(Verwaltung.getStudenten()));
 		tableView.getColumns().addAll(idCol, vornameCol, nachnameCol, matrikelCol);
-		
+
 		Label ueberschrift = new Label("Studenten");
 		ueberschrift.setPadding(new Insets(5, 5, 5, 5));
 		layout.setTop(ueberschrift);

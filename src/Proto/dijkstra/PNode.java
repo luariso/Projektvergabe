@@ -1,4 +1,4 @@
-package Proto;
+package Proto.dijkstra;
 
 public class PNode{
 

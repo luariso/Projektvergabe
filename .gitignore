@@ -4,3 +4,6 @@
 
 # Ignore artifacts
 out/*
+
+# Ignore testFiles
+data/testfiles/*

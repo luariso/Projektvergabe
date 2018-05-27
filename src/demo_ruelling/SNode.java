@@ -1,3 +1,5 @@
+package demo_ruelling;
+
 import java.util.*;
 
 public class SNode {                           // Anonymisierte Studenten-Daten

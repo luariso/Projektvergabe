@@ -1,4 +1,7 @@
-package Proto;
+package Proto.domain;
+
+import Proto.dijkstra.Projekt;
+import Proto.dijkstra.SNode;
 
 import java.util.*;
 
@@ -106,14 +109,6 @@ public class Student extends Nutzer {
 	
 	public int getId(){
 		return id;
-	}
-	
-	public String getVorname(){
-		return vorname;
-	}
-	
-	public String getName(){
-		return name;
 	}
 	
 	public String getMatrikelNummer(){

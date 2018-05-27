@@ -1,4 +1,6 @@
-package Proto;
+package Proto.domain;
+
+import Proto.dijkstra.Projekt;
 
 public class Bewertung {
 
