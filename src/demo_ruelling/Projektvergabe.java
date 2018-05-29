@@ -336,7 +336,7 @@ public class Projektvergabe {
       final String studentsFilename_out="C:/Users/ruelling/Desktop/ProjektvergabeProjekt/students_out.txt";
 */
       final String projectsFilename=    "data/projects.txt";
-      final String studentsFilename=    "data/students.txt";
+      final String studentsFilename=    "data/testfiles/students_bad_case.txt";
       final String studentsFilename_out="out/students_out.txt";
    
       final Project[] projects= readProjectsFromFile(projectsFilename);
@@ -347,7 +347,7 @@ public class Projektvergabe {
 
 
       // Ergebnisse des Vergabeverfahrens
-      MatchingResult = new Integer[number_of_students];   // zugewiesenes Projekt pro demo_ruelling.Student
+      MatchingResult = new Integer[number_of_students];   // zugewiesenes Projekt pro Student
       // Die dazugehörige studentische Bewertungen sat eines Studenten s erhält man durch
       // p = MatchingResult[s-1];
       // sat = students[s-1].getSatisfaction[p-1];
@@ -372,7 +372,7 @@ public class Projektvergabe {
 
 
 
-      final Frame frame = new Frame ("demo_ruelling.Projektvergabe");
+      final Frame frame = new Frame ("Projektvergabe");
       frame.setLayout(null);
 
 
@@ -696,14 +696,14 @@ public class Projektvergabe {
                        System.out.println();
                      }
                   }
-                  System.out.println("Kontrollausgabe: demo_ruelling.Student=" + s.getId() + " sat=" + satisfactions);
+                  System.out.println("Kontrollausgabe: Student=" + s.getId() + " sat=" + satisfactions);
                   sNodes.add(/* s.getId(),*/  new SNode(s.getId(), satisfactions));
                }
 
                // Umkopieren der Projeke in anonymisierte Objekte
                ArrayList<PNode> pNodes = new ArrayList<PNode>(); 
                for (Project p: projects) {
-                  //System.out.println("Kontrollausgabe: demo_ruelling.Project=" + p.getId() + " capacity=" + p.getCapacity());
+                  //System.out.println("Kontrollausgabe: Project=" + p.getId() + " capacity=" + p.getCapacity());
                   pNodes.add(new PNode(p.getId(), p.getCapacity()));
                   //System.out.println("Kontrollausgabe: pNodes.size=" + pNodes.size());
                }
@@ -721,7 +721,7 @@ public class Projektvergabe {
                   MatchingResult[s-1]= p;
                }
 
-               System.out.println("\ndemo_ruelling.Projektvergabe:");
+               System.out.println("\nProjektvergabe:");
                for (Integer s:matching.keySet())
                   System.out.println(students[s-1].getName() + ", " +students[s-1].getName2() + "  -->   " + projects[matching.get(s)-1].toString());  
 
@@ -830,24 +830,17 @@ public class Projektvergabe {
       });
   }
 
-    private static <T> List<T> randomizeList(List<T> list) {
-        List<Integer> indices = new LinkedList<>();
-
-        for (T t: list) {
-            indices.add(list.indexOf(t));
-        }
-
-        List<T> result = new ArrayList<>();
+    private static <T> List<T>  randomizeList(List<T> list) {
+        List<T> copy = new ArrayList<>(list);
+        List<T> result = new ArrayList<>(list.size());
         Random random = new Random();
-        int nextIndex, nextRandom;
+        int nextInt;
 
         for (int i = 0; i < list.size(); ++i) {
-            nextRandom = random.nextInt(indices.size());
-            nextIndex = indices.get(nextRandom);
-            result.add(list.get(nextIndex));
-            indices.remove(nextRandom);
+            nextInt = random.nextInt(copy.size());
+            result.add(i, copy.get(nextInt));
+            copy.remove(nextInt);
         }
-
         return result;
     }
 }
