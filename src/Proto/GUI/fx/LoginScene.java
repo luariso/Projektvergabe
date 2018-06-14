@@ -26,7 +26,7 @@ public class LoginScene {
 
     LoginScene(MainWindow window) {
         this.window = window;
-        students = Verwaltung.getStudenten();
+        students = Verwaltung.getStudents();
         supervisors = Verwaltung.getSupervisors();
         GridPane grid = createGridPane();
 
@@ -34,24 +34,15 @@ public class LoginScene {
     }
 
     private void okClicked(Text loginFailed, RadioButton studentToggle, TextField userName) {
-        boolean exceptionThrown = false;
-        Optional<? extends Nutzer> user = Optional.empty();
-        try {
-            String fullName = userName.getText().toLowerCase();
-            String name = fullName.substring(0, fullName.indexOf(" "));
-            String sureName = fullName.substring(fullName.indexOf(" ") + 1);
-
+        Optional<? extends Nutzer> user;
 
             if (studentToggle.isSelected()) {
-                user = students.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurename().toLowerCase().equals(sureName)).findFirst();
+                user = students.stream().filter(s -> (s.getName() + " " + s.getSurename()).equalsIgnoreCase(userName.getText())).findFirst();
             } else {
-                user = supervisors.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurename().toLowerCase().equals(sureName)).findFirst();
+                user = supervisors.stream().filter(s -> (s.getName() + " " +  s.getSurename()).equalsIgnoreCase(userName.getText())).findFirst();
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            exceptionThrown = true;
-        }
 
-        if(user.isPresent() && !exceptionThrown) { // TODO WTF!? resolve warning
+        if(user.isPresent()) {
             window.login(user.get());
         } else {
             loginFailed.setFill(Color.FIREBRICK);
