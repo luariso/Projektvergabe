@@ -14,7 +14,7 @@ public class Verwaltung {
 
 	private static Collection<Projekt> projekte = new ArrayList<>();
 	private static Collection<Student> studenten = new ArrayList<>();
-	private static Collection<Verantwortlicher> supervisors = new ArrayList<>();
+	private static Collection<Supervisor> supervisors = new ArrayList<>();
 	
 	private static ArrayList<PNode> pNodes;
 	private static ArrayList<SNode> sNodes;
@@ -126,8 +126,8 @@ public class Verwaltung {
 				for(Student s : studenten){
 					int i = s.getId();
 					ergebnis[i][0] = s.getId();
-					ergebnis[i][1] = s.getVorname();
-					ergebnis[i][2] = s.getName();
+					ergebnis[i][1] = s.getName();
+					ergebnis[i][2] = s.getSurename();
 					ergebnis[i][3] = s.getMatrikelNummer();
 				}
 				return ergebnis;
@@ -136,8 +136,8 @@ public class Verwaltung {
 				for(Student s : studenten){
 						int i = s.getId();
 						ergebnis[i][0] = s.getId();
-						ergebnis[i][1] = s.getVorname();
-						ergebnis[i][2] = s.getName();
+						ergebnis[i][1] = s.getName();
+						ergebnis[i][2] = s.getSurename();
 						ergebnis[i][3] = s.getMatrikelNummer();
 						if(s.getProjekt() != null){
 							ergebnis[i][4] = s.getProjekt().getTitel();
@@ -166,7 +166,7 @@ public class Verwaltung {
 		return studenten;
 	}
 
-	public static Collection<Verantwortlicher> getSupervisors(){
+	public static Collection<Supervisor> getSupervisors(){
 		return supervisors;
 	}
 }

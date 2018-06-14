@@ -2,6 +2,7 @@ package Proto.persistence;
 
 import Proto.dijkstra.Projekt;
 import Proto.domain.Student;
+import Proto.domain.Supervisor;
 
 import java.io.File;
 import java.util.*;
@@ -53,21 +54,28 @@ public class PersistenzTextDateien implements Persistenz{
 		try{
 			Scanner dateiScanner = new Scanner(new File(pfad + "projects.txt"));
 			while(dateiScanner.hasNext()){
-				Integer id = null, maxTeilnehmer = null;
-				String titel = null;
+				Integer id, maxTeilnehmer;
+				String supervisorSurename, supervisorName;
+				String titel;
 				
 				while(!dateiScanner.hasNextInt()){
 					dateiScanner.next();
 				}
 				id = dateiScanner.nextInt() - 1;
 				maxTeilnehmer = dateiScanner.nextInt();
+				supervisorSurename = dateiScanner.next();
+				supervisorName = dateiScanner.next();
+
 				titel = dateiScanner.nextLine();
-				int i=0;
+				int i = 0;
 				while ((i<titel.length()) && (titel.charAt(i)==' ')){
 					++i;
 				}
 				titel = titel.substring(i,titel.length());
-				ergebnis.add(new Projekt(id, titel, maxTeilnehmer));
+				Projekt project = new Projekt(id, titel, maxTeilnehmer);
+				ergebnis.add(project);
+				Supervisor supervisor = new Supervisor(supervisorSurename, supervisorName);
+				supervisor.addProject(project);
 			}
 			dateiScanner.close();
 		}

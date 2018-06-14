@@ -1,7 +1,7 @@
 package Proto.dijkstra;
 
 import Proto.domain.Student;
-import Proto.domain.Verantwortlicher;
+import Proto.domain.Supervisor;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ public class Projekt {
 	private String titel;
 	private int maxTeilnehmer;
 	private ArrayList<Student> teilnehmer = new ArrayList<>();
-	private Collection<Verantwortlicher> verantwortliche;
+	private Collection<Supervisor> verantwortliche;
 	private PNode pNode;
 	
 	public Projekt(int id, String titel, int maxTeilnehmer){

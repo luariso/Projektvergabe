@@ -14,11 +14,10 @@ public class Student extends Nutzer {
 	private String matrikelNummer;
 	private SNode sNode;
 	
-	public Student(int id, String name, String vorname, String matrikelNummer){
+	public Student(int id, String surename, String name, String matrikelNummer){
+		super(surename, name);
 		this.id = id;
 		this.matrikelNummer = matrikelNummer;
-		this.name = name;
-		this.vorname = vorname;
 	}
 	
 	public void addBewertungen(int projekt, int note){
@@ -27,7 +26,7 @@ public class Student extends Nutzer {
 	
 	@Override
 	public String toString(){
-		String ergebnis = this.vorname + " " +
+		String ergebnis = this.name + " " +
 				" " + this.name;
 //		if(this.sNode != null){
 //			ergebnis += " " + this.sNode.getId();

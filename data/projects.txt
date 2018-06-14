@@ -1,11 +1,11 @@
-  1  6   Experimente mit Quadrokoptern
-  2  4   Einführung eines Algorithmus zur Projektvergabe
-  3  4   HFU-Train
-  4  2   Software-Entwicklung für Android
-  5  4   Roboter spielen Fußball
-  6  4   Untersuchung von Zahlenfolgen 1, 1, 2, 3, 5, 8, ...
-  7  2   Präprozessoren für Java-Dialekte
-  8  3   Smart Home: Beurteilung von Nutzen und Risiken
-  9  2   Anwendungen neuronaler Netze
- 10  2   Implementierung neuronaler Netze auf FPGAs
+  1  6   Ruelling    Wolfgang   Experimente mit Quadrokoptern
+  2  4   Professor   X          Einführung eines Algorithmus zur Projektvergabe
+  3  4   Professor   X          HFU-Train
+  4  2   Ruelling    Wolfgang   Software-Entwicklung für Android
+  5  4   Professor   X          Roboter spielen Fußball
+  6  4   Professor   X          Untersuchung von Zahlenfolgen 1, 1, 2, 3, 5, 8, ...
+  7  2   Skinner     Simoure    Präprozessoren für Java-Dialekte
+  8  3   Skinner     Simoure    Smart Home: Beurteilung von Nutzen und Risiken
+  9  2   Skinner     Simoure    Anwendungen neuronaler Netze
+ 10  2   Ruelling    Wolfgang   Implementierung neuronaler Netze auf FPGAs
 

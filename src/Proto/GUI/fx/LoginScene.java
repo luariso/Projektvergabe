@@ -2,7 +2,7 @@ package Proto.gui.fx;
 
 import Proto.domain.Nutzer;
 import Proto.domain.Student;
-import Proto.domain.Verantwortlicher;
+import Proto.domain.Supervisor;
 import Proto.domain.Verwaltung;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class LoginScene {
 
     private Collection<Student> students;
-    private Collection<Verantwortlicher> supervisors;
+    private Collection<Supervisor> supervisors;
     private Scene scene;
     private MainWindow window;
 
@@ -43,9 +43,9 @@ public class LoginScene {
 
 
             if (studentToggle.isSelected()) {
-                user = students.stream().filter(s -> s.getVorname().toLowerCase().equals(name) && s.getName().toLowerCase().equals(sureName)).findFirst();
+                user = students.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurename().toLowerCase().equals(sureName)).findFirst();
             } else {
-                user = supervisors.stream().filter(s -> s.getVorname().toLowerCase().equals(name) && s.getName().toLowerCase().equals(sureName)).findFirst();
+                user = supervisors.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurename().toLowerCase().equals(sureName)).findFirst();
             }
         } catch (StringIndexOutOfBoundsException e) {
             exceptionThrown = true;
