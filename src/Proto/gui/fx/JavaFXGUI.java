@@ -1,8 +1,8 @@
 package Proto.gui.fx;
 
-import Proto.domain.Bewertung;
+import Proto.domain.Rating;
 import Proto.domain.Student;
-import Proto.domain.Verwaltung;
+import Proto.domain.Control;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +30,7 @@ public class JavaFXGUI extends Application {
 
 		primaryStage.setTitle("Projektvergabe");
 		primaryStage.setScene(mainScene);
-		mainLayout.setCenter(getBewertungsScene(Verwaltung.getStudent(0)));
+		mainLayout.setCenter(getBewertungsScene(Control.getStudent(0)));
 		mainLayout.setRight(getStudentenScene());
 
 		primaryStage.sizeToScene();
@@ -41,16 +41,16 @@ public class JavaFXGUI extends Application {
 	public Pane getBewertungsScene(Student s){
 		BorderPane layout = new BorderPane();
 
-		TableView<Bewertung> tabelle = new TableView<>();
+		TableView<Rating> tabelle = new TableView<>();
 
-		TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
+		TableColumn<Rating, String> idCol = new TableColumn<>("Project");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
 
-		TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
+		TableColumn<Rating, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
 		bewertungCol.setCellFactory((param) -> new RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
 		bewertungCol.setCellValueFactory(new PropertyValueFactory<>("note"));
 
-		tabelle.setItems(FXCollections.observableArrayList(s.getBewertungen()));
+		tabelle.setItems(FXCollections.observableArrayList(s.getRatings()));
 		tabelle.getColumns().addAll(idCol, bewertungCol);
 
 		Label ueberschrift = new Label("Die Bewertungen von " + s);
@@ -114,7 +114,7 @@ public class JavaFXGUI extends Application {
 		TableColumn<Student, String> matrikelCol = new TableColumn<>("Matrikelnummer");
 		matrikelCol.setCellValueFactory(new PropertyValueFactory<>("matrikelNummer"));
 
-		tableView.setItems(FXCollections.observableArrayList(Verwaltung.getStudenten()));
+		tableView.setItems(FXCollections.observableArrayList(Control.getStudents()));
 		tableView.getColumns().addAll(idCol, vornameCol, nachnameCol, matrikelCol);
 
 		Label ueberschrift = new Label("Studenten");

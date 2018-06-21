@@ -4,7 +4,7 @@ public class PNode{
 
     private Integer id; 
     private Integer capacity;
-    private Projekt projekt;
+    private Project project;
 
     public PNode(Integer id, Integer capacity) {
        this.id = id; 
@@ -15,12 +15,12 @@ public class PNode{
     public Integer getCapacity() { return capacity; }
     public String toString() {return id.toString(); }
     
-    public Projekt getProjekt(){
-        return projekt;
+    public Project getProject(){
+        return project;
     }
     
-    public void setProjekt(Projekt projekt){
-        this.projekt = projekt;
+    public void setProject(Project project){
+        this.project = project;
     }
 }
 

@@ -1,9 +1,9 @@
 package Proto.gui.fx;
 
-import Proto.domain.Nutzer;
+import Proto.domain.User;
 import Proto.domain.Student;
 import Proto.domain.Supervisor;
-import Proto.domain.Verwaltung;
+import Proto.domain.Control;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,23 +26,32 @@ public class LoginScene {
 
     LoginScene(MainWindow window) {
         this.window = window;
-        students = Verwaltung.getStudents();
-        supervisors = Verwaltung.getSupervisors();
+        students = Control.getStudents();
+        supervisors = Control.getSupervisors();
         GridPane grid = createGridPane();
 
         scene = new Scene(grid, 300, 275);
     }
 
     private void okClicked(Text loginFailed, RadioButton studentToggle, TextField userName) {
-        Optional<? extends Nutzer> user;
+        boolean exceptionThrown = false;
+        Optional<? extends User> user = Optional.empty();
+        try {
+            String fullName = userName.getText().toLowerCase();
+            String name = fullName.substring(0, fullName.indexOf(" "));
+            String sureName = fullName.substring(fullName.indexOf(" ") + 1);
+
 
             if (studentToggle.isSelected()) {
-                user = students.stream().filter(s -> (s.getName() + " " + s.getSurename()).equalsIgnoreCase(userName.getText())).findFirst();
+                user = students.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurname().toLowerCase().equals(sureName)).findFirst();
             } else {
-                user = supervisors.stream().filter(s -> (s.getName() + " " +  s.getSurename()).equalsIgnoreCase(userName.getText())).findFirst();
+                user = supervisors.stream().filter(s -> s.getName().toLowerCase().equals(name) && s.getSurname().toLowerCase().equals(sureName)).findFirst();
             }
+        } catch (StringIndexOutOfBoundsException e) {
+            exceptionThrown = true;
+        }
 
-        if(user.isPresent()) {
+        if(user.isPresent() && !exceptionThrown) { // TODO WTF!? resolve warning
             window.login(user.get());
         } else {
             loginFailed.setFill(Color.FIREBRICK);

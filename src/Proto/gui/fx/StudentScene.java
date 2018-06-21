@@ -1,6 +1,6 @@
 package Proto.gui.fx;
 
-import Proto.domain.Bewertung;
+import Proto.domain.Rating;
 import Proto.domain.Student;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +29,7 @@ public class StudentScene {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text sceneTitle = new Text("Student " + student.getVorname() + " " + student.getName());
+        Text sceneTitle = new Text("Student " + student.getName() + " " + student.getName());
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(sceneTitle, 0, 0, 2, 1);
 
@@ -44,7 +44,7 @@ public class StudentScene {
         logoutBtn.getChildren().add(logout);
         grid.add(logoutBtn, 1, 1);
 
-        TableView<Bewertung> table = getBewertungsPane(student);
+        TableView<Rating> table = getBewertungsPane(student);
         grid.add(table, 0, 2, 2, 1);
 
         save.setOnAction(event -> save(table));
@@ -53,22 +53,22 @@ public class StudentScene {
         scene = new Scene(grid, 500, 500);
     }
 
-    private void save(TableView<Bewertung> table) {
+    private void save(TableView<Rating> table) {
         // TODO implement
     }
 
 
-    public TableView<Bewertung> getBewertungsPane(Student s){
-        TableView<Bewertung> tabelle = new TableView<>();
+    public TableView<Rating> getBewertungsPane(Student s){
+        TableView<Rating> tabelle = new TableView<>();
 
-        TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
+        TableColumn<Rating, String> idCol = new TableColumn<>("Project");
         idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
 
-        TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
+        TableColumn<Rating, Integer> bewertungCol = new TableColumn<>("Bewertung (1 - 5)");
         bewertungCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
-        bewertungCol.setCellValueFactory(new PropertyValueFactory<>("note"));
+        bewertungCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
 
-        tabelle.setItems(FXCollections.observableArrayList(s.getBewertungen()));
+        tabelle.setItems(FXCollections.observableArrayList(s.getRatings()));
         tabelle.getColumns().addAll(idCol, bewertungCol);
 
         tabelle.setPrefWidth(450);

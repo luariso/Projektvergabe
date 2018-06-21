@@ -1,19 +1,19 @@
 package Proto.domain;
 
-import Proto.dijkstra.Projekt;
+import Proto.dijkstra.Project;
 
 import java.util.*;
 
-public class Supervisor extends Nutzer {
+public class Supervisor extends User{
 
-	private Collection<Projekt> projects = new ArrayList<>();
+	private Collection<Project> projects = new ArrayList<>();
 
-	public Supervisor(String surename, String name) {
-		super(surename, name);
-		System.out.println("Supervisor created: " + surename + " " + name);
+	public Supervisor(String surname, String name) {
+		super(surname, name);
+		System.out.println("Supervisor created: " + surname + " " + name);
 	}
 
-	public void addProject(Projekt p) {
+	public void addProject(Project p) {
 		projects.add(p);
 	}
 }
