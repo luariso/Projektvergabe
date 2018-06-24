@@ -1,5 +1,6 @@
-package Proto.dijkstra;
+package Proto.domain;
 
+import Proto.dijkstra.PNode;
 import Proto.domain.Student;
 import Proto.domain.Supervisor;
 
@@ -22,10 +23,11 @@ public class Project{
 	
 	@Override
 	public String toString(){
-		return this.id +
-				" " + title + " " +
-				" " + maxMembers +
-				"\n";
+//		return this.id +
+//				" " + title + " " +
+//				" " + maxMembers +
+//				"\n";
+		return title;
 	}
 	
 	//Erstellt eine PNode aus dem Project und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind

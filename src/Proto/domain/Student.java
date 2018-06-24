@@ -1,6 +1,5 @@
 package Proto.domain;
 
-import Proto.dijkstra.Project;
 import Proto.dijkstra.SNode;
 
 import java.util.*;

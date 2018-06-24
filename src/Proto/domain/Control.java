@@ -2,7 +2,6 @@ package Proto.domain;
 
 import Proto.dijkstra.Graph;
 import Proto.dijkstra.PNode;
-import Proto.dijkstra.Project;
 import Proto.dijkstra.SNode;
 import Proto.gui.fx.MainWindow;
 import Proto.persistence.Persistence;
@@ -15,6 +14,7 @@ public class Control{
 	private static Collection<Project> projects = new ArrayList<>();
 	private static Collection<Student> students = new ArrayList<>();
 	private static Collection<Supervisor> supervisors = new ArrayList<>();
+	private static Collection<Admin> admins = new ArrayList<>();
 	
 	private static ArrayList<PNode> pNodes;
 	private static ArrayList<SNode> sNodes;
@@ -23,8 +23,8 @@ public class Control{
 	public static void main(String[] args){
 		importProjects();
 		importStudents();
-//		JavaFXGUI.oeffne(args);
-		MainWindow.oeffne(args);
+		admins.add(new Admin("Adminsen", "Admin"));
+		MainWindow.open(args);
 	}
 	
 	public static void importProjects(){
@@ -167,5 +167,9 @@ public class Control{
 
 	public static Collection<Supervisor> getSupervisors(){
 		return supervisors;
+	}
+	
+	public static Collection<Admin> getAdmins(){
+		return admins;
 	}
 }

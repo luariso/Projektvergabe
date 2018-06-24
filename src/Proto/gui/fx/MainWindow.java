@@ -1,5 +1,6 @@
 package Proto.gui.fx;
 
+import Proto.domain.Supervisor;
 import Proto.domain.User;
 import Proto.domain.Student;
 import javafx.application.Application;
@@ -9,7 +10,7 @@ public class MainWindow extends Application{
 
     private Stage primaryStage;
 
-    public static void oeffne(String[] args) {
+    public static void open(String[] args) {
         launch(args);
     }
 
@@ -24,8 +25,10 @@ public class MainWindow extends Application{
     public void login(User user) {
         if (user.getClass() == Student.class) {
             primaryStage.setScene(new StudentScene((Student) user, this).getScene());
-        } else {
+        } else if(user.getClass() == Supervisor.class) {
             // TODO implement
+        } else {
+            primaryStage.setScene(new AdminScene(this).getScene());
         }
     }
 

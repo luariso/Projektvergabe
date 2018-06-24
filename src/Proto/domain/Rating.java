@@ -1,7 +1,5 @@
 package Proto.domain;
 
-import Proto.dijkstra.Project;
-
 public class Rating{
 
 	private Student student;

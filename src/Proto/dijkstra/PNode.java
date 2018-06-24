@@ -1,5 +1,7 @@
 package Proto.dijkstra;
 
+import Proto.domain.Project;
+
 public class PNode{
 
     private Integer id; 

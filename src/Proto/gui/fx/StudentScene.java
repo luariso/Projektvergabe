@@ -44,7 +44,7 @@ public class StudentScene {
         logoutBtn.getChildren().add(logout);
         grid.add(logoutBtn, 1, 1);
 
-        TableView<Rating> table = getBewertungsPane(student);
+        TableView<Rating> table = getRatingPane(student);
         grid.add(table, 0, 2, 2, 1);
 
         save.setOnAction(event -> save(table));
@@ -58,21 +58,21 @@ public class StudentScene {
     }
 
 
-    public TableView<Rating> getBewertungsPane(Student s){
-        TableView<Rating> tabelle = new TableView<>();
+    public TableView<Rating> getRatingPane(Student s){
+        TableView<Rating> table = new TableView<>();
 
         TableColumn<Rating, String> idCol = new TableColumn<>("Project");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
-        TableColumn<Rating, Integer> bewertungCol = new TableColumn<>("Bewertung (1 - 5)");
-        bewertungCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
-        bewertungCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        TableColumn<Rating, Integer> ratingCol = new TableColumn<>("Bewertung (1 - 5)");
+        ratingCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
+        ratingCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
 
-        tabelle.setItems(FXCollections.observableArrayList(s.getRatings()));
-        tabelle.getColumns().addAll(idCol, bewertungCol);
+        table.setItems(FXCollections.observableArrayList(s.getRatings()));
+        table.getColumns().addAll(idCol, ratingCol);
 
-        tabelle.setPrefWidth(450);
-        return tabelle;
+        table.setPrefWidth(450);
+        return table;
     }
 
     public static class RadioButtonCell<S, T> extends TableCell<S, T> {

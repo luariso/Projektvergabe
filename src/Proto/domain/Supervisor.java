@@ -1,7 +1,5 @@
 package Proto.domain;
 
-import Proto.dijkstra.Project;
-
 import java.util.*;
 
 public class Supervisor extends User{

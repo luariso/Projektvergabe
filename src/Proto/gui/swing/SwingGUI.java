@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 
+@Deprecated
 public class SwingGUI{
 
 	private JFrame frame = getFenster();

@@ -1,6 +1,6 @@
 package Proto.persistence;
 
-import Proto.dijkstra.Project;
+import Proto.domain.Project;
 import Proto.domain.Student;
 
 import java.util.*;
