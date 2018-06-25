@@ -1,24 +1,24 @@
 package Proto.domain;
 
-public class Bewertung {
+public class Rating{
 
 	private Student student;
 	private Project project;
-	private int note;
+	private int grade;
 	
-	public Bewertung(Student student, Project project, int note){
+	public Rating(Student student, Project project, int grade){
 		this.student = student;
 		this.project = project;
-		this.note = note;
+		this.grade = grade;
 	}
 	
 	@Override
 	public String toString(){
-		return "(" + project.getId() + ", " + note + ")";
+		return "(" + project.getId() + ", " + grade + ")";
 	}
 	
-	public int getNote(){
-		return note;
+	public int getGrade(){
+		return grade;
 	}
 	
 	public Project getProject(){

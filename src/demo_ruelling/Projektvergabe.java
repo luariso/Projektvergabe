@@ -347,7 +347,7 @@ public class Projektvergabe {
 
 
       // Ergebnisse des Vergabeverfahrens
-      MatchingResult = new Integer[number_of_students];   // zugewiesenes Projekt pro Student
+      MatchingResult = new Integer[number_of_students];   // zugewiesenes Project pro Student
       // Die dazugehörige studentische Bewertungen sat eines Studenten s erhält man durch
       // p = MatchingResult[s-1];
       // sat = students[s-1].getSatisfaction[p-1];

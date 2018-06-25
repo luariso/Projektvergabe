@@ -1,39 +1,37 @@
 package Proto.domain;
 
 import Proto.dijkstra.PNode;
-import Proto.domain.Student;
-import Proto.domain.Supervisor;
 
 import java.util.*;
 
 public class Project {
 
 	private int id;
-	private String titel;
-	private int maxTeilnehmer;
-	private ArrayList<Student> teilnehmer = new ArrayList<>();
-	private Collection<Supervisor> verantwortliche;
+	private String title;
+	private int maxMembers;
+	private ArrayList<Student> members = new ArrayList<>();
+	private Collection<Supervisor> supervisors;
 	private PNode pNode;
 	
-	public Project(int id, String titel, int maxTeilnehmer){
+	public Project(int id, String title, int maxMembers){
 		this.id = id;
-		this.titel = titel;
-		this.maxTeilnehmer = maxTeilnehmer;
+		this.title = title;
+		this.maxMembers = maxMembers;
 	}
 	
 	@Override
 	public String toString(){
 		return this.id +
-				" " + titel + " " +
-				" " + maxTeilnehmer +
+				" " + title + " " +
+				" " + maxMembers +
 				"\n";
 	}
 	
 	//Erstellt eine PNode aus dem Project und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind
 	
 	public PNode makePNode(int id){
-		this.pNode = new PNode(id, this.maxTeilnehmer - this.teilnehmer.size());
-		this.pNode.setProjekt(this);
+		this.pNode = new PNode(id, this.maxMembers - this.members.size());
+		this.pNode.setProject(this);
 		return this.pNode;
 	}
 	
@@ -45,34 +43,34 @@ public class Project {
 		return pNode;
 	}
 	
-	public String getTitel(){
-		return titel;
+	public String getTitle(){
+		return title;
 	}
 	
 	public void setId(int id){
 		this.id = id;
 	}
 	
-	public void setTitel(String titel){
-		this.titel = titel;
+	public void setTitle(String title){
+		this.title = title;
 	}
 	
-	public void setMaxTeilnehmer(int maxTeilnehmer){
-		this.maxTeilnehmer = maxTeilnehmer;
+	public void setMaxMembers(int maxMembers){
+		this.maxMembers = maxMembers;
 	}
 	
-	public int getMaxTeilnehmer(){
-		return maxTeilnehmer;
+	public int getMaxMembers(){
+		return maxMembers;
 	}
 	
 	public void addTeilnehmer(Student s){
-		if(teilnehmer.contains(s)){
+		if(members.contains(s)){
 			throw new IllegalArgumentException("Der Student " + s + " ist bereits Teilnehmer dieses Projekts.");
 		}
-		teilnehmer.add(s);
+		members.add(s);
 	}
 	
-	public ArrayList<Student> getTeilnehmer(){
-		return teilnehmer;
+	public ArrayList<Student> getMembers(){
+		return members;
 	}
 }

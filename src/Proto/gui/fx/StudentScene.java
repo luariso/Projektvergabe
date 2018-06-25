@@ -1,6 +1,6 @@
 package Proto.gui.fx;
 
-import Proto.domain.Bewertung;
+import Proto.domain.Rating;
 import Proto.domain.Student;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +29,8 @@ public class StudentScene {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text sceneTitle = new Text("Student " + student.getName() + " " + student.getSurename());
+
+        Text sceneTitle = new Text("Student " + student.getName() + " " + student.getSurname());
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(sceneTitle, 0, 0, 2, 1);
 
@@ -38,12 +39,12 @@ public class StudentScene {
         logoutBtn.getChildren().add(logout);
         grid.add(logoutBtn, 1, 1);
 
+        TableView<Rating> table = getRatingPane(student);
         Button save = new Button("Übernehmen");
         HBox saveBtn = new HBox(10);
         saveBtn.getChildren().add(save);
         grid.add(saveBtn, 0, 1);
 
-        TableView<Bewertung> table = getBewertungsPane(student);
         grid.add(table, 0, 2, 2, 1);
 
         save.setOnAction(event -> save(table));
@@ -52,26 +53,26 @@ public class StudentScene {
         scene = new Scene(grid, 500, 500);
     }
 
-    private void save(TableView<Bewertung> table) {
+    private void save(TableView<Rating> table) {
         // TODO implement
     }
 
 
-    public TableView<Bewertung> getBewertungsPane(Student s){
-        TableView<Bewertung> tabelle = new TableView<>();
+    public TableView<Rating> getRatingPane(Student s){
+        TableView<Rating> table = new TableView<>();
 
-        TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
+        TableColumn<Rating, String> idCol = new TableColumn<>("Project");
         idCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
-        TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
-        bewertungCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
-        bewertungCol.setCellValueFactory(new PropertyValueFactory<>("note"));
+        TableColumn<Rating, Integer> ratingCol = new TableColumn<>("Bewertung (1 - 5)");
+        ratingCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
+        ratingCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
 
-        tabelle.setItems(FXCollections.observableArrayList(s.getBewertungen()));
-        tabelle.getColumns().addAll(idCol, bewertungCol);
+        table.setItems(FXCollections.observableArrayList(s.getRatings()));
+        table.getColumns().addAll(idCol, ratingCol);
 
-        tabelle.setPrefWidth(450);
-        return tabelle;
+        table.setPrefWidth(450);
+        return table;
     }
 
     public static class RadioButtonCell<S, T> extends TableCell<S, T> {

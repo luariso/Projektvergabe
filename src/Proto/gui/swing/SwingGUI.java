@@ -1,11 +1,12 @@
 package Proto.gui.swing;
 
-import Proto.domain.Verwaltung;
+import Proto.domain.Control;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 
+@Deprecated
 public class SwingGUI{
 
 	private JFrame frame = getFenster();
@@ -13,8 +14,8 @@ public class SwingGUI{
 	private JPanel projektPanel = new JPanel(new BorderLayout());
 	private String[] studentenUeberschriften = new String[]{"ID", "Vorname", "Nachname", "Matrikelnummer", "Project", "Zufriedenheit"};
 	private String[] projektUeberschriften = new String[]{"ID", "Titel", "Plätze"};
-	private JScrollPane studentenTabelle = getTabelle(studentenUeberschriften , Verwaltung.present("matching"));
-	private JScrollPane projektTabelle = getTabelle(projektUeberschriften, Verwaltung.present("projekte"));
+	private JScrollPane studentenTabelle = getTabelle(studentenUeberschriften , Control.present("matching"));
+	private JScrollPane projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
 	public void oeffne(){
 		frame.add(getMenu());
 		frame.pack();
@@ -69,13 +70,13 @@ public class SwingGUI{
 
 		JButton zuweisung = new JButton("Zuweisung");
 		zuweisung.addActionListener(e -> {
-			Verwaltung.ordne();
+			Control.match();
 			zuweisung.setEnabled(false);
 			studentenPanel.remove(studentenTabelle);
-			studentenTabelle = getTabelle(studentenUeberschriften, Verwaltung.present("matching"));
+			studentenTabelle = getTabelle(studentenUeberschriften, Control.present("matching"));
 			studentenPanel.add(studentenTabelle);
 			projektPanel.remove(projektTabelle);
-			projektTabelle = getTabelle(projektUeberschriften, Verwaltung.present("projekte"));
+			projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
 			projektPanel.add(projektTabelle);
 			frame.repaint();
 		});
@@ -85,10 +86,10 @@ public class SwingGUI{
 
 		JButton importiereStudenten = new JButton("importiere Studenten");
 		importiereStudenten.addActionListener( e -> {
-			Verwaltung.importStudents();
+			Control.importStudents();
 			zuweisung.setEnabled(true);
 			studentenPanel.remove(studentenTabelle);
-			studentenTabelle = getTabelle(studentenUeberschriften, Verwaltung.present("matching"));
+			studentenTabelle = getTabelle(studentenUeberschriften, Control.present("matching"));
 			studentenPanel.add(studentenTabelle);
 			frame.repaint();
 		});
@@ -97,10 +98,10 @@ public class SwingGUI{
 
 		JButton importiereProjekte = new JButton("importiere Projekte");
 		importiereProjekte.addActionListener( e -> {
-			Verwaltung.importProjects();
+			Control.importProjects();
 			importiereStudenten.setEnabled(true);
 			projektPanel.remove(projektTabelle);
-			projektTabelle = getTabelle(projektUeberschriften, Verwaltung.present("projekte"));
+			projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
 			projektPanel.add(projektTabelle);
 			frame.repaint();
 		});

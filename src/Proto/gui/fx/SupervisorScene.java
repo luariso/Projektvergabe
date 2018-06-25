@@ -32,7 +32,7 @@ public class SupervisorScene {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(padding, padding, padding, padding));
 
-		Text sceneTitle = new Text("Projekte von " + supervisor.getName()+ " " + supervisor.getSurename());
+		Text sceneTitle = new Text("Projekte von " + supervisor.getName()+ " " + supervisor.getSurname());
 		sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(sceneTitle, 0, 0, 2, 1);
 
@@ -57,7 +57,7 @@ public class SupervisorScene {
 
 		List<String> projects = new ArrayList<>();
 		for (Project p: supervisor.getProjects()) {
-			projects.add(p.getId() + " " + p.getTitel());
+			projects.add(p.getId() + " " + p.getTitle());
 		}
 
 		ObservableList<String> items = FXCollections.observableArrayList(projects);

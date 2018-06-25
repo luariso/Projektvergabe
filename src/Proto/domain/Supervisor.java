@@ -2,12 +2,12 @@ package Proto.domain;
 
 import java.util.*;
 
-public class Supervisor extends Nutzer {
+public class Supervisor extends User {
 
 	private Collection<Project> projects = new ArrayList<>();
 
-	public Supervisor(String surename, String name) {
-		super(surename, name);
+	public Supervisor(String surname, String name) {
+		super(surname, name);
 	}
 
 	public void addProject(Project p) {
@@ -16,5 +16,15 @@ public class Supervisor extends Nutzer {
 
 	public Collection<Project> getProjects() {
 		return projects;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj.getClass().equals(Supervisor.class)) {
+			return name.equals(((Supervisor) obj).getName()) && ((Supervisor) obj).getSurname().equals(surname);
+		}
+		else {
+			return false;
+		}
 	}
 }
