@@ -1,11 +1,12 @@
-package Proto.dijkstra;
+package Proto.domain;
 
+import Proto.dijkstra.PNode;
 import Proto.domain.Student;
 import Proto.domain.Supervisor;
 
 import java.util.*;
 
-public class Projekt {
+public class Project {
 
 	private int id;
 	private String titel;
@@ -14,7 +15,7 @@ public class Projekt {
 	private Collection<Supervisor> verantwortliche;
 	private PNode pNode;
 	
-	public Projekt(int id, String titel, int maxTeilnehmer){
+	public Project(int id, String titel, int maxTeilnehmer){
 		this.id = id;
 		this.titel = titel;
 		this.maxTeilnehmer = maxTeilnehmer;
@@ -28,7 +29,7 @@ public class Projekt {
 				"\n";
 	}
 	
-	//Erstellt eine PNode aus dem Projekt und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind
+	//Erstellt eine PNode aus dem Project und "merkt" sich diese als Attribut, da die IDs unterschiedlich sind
 	
 	public PNode makePNode(int id){
 		this.pNode = new PNode(id, this.maxTeilnehmer - this.teilnehmer.size());

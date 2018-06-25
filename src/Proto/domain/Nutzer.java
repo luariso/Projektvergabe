@@ -17,6 +17,9 @@ public abstract class Nutzer {
 	public String getName() {
 		return name;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return surename + " " + name;
+	}
 }

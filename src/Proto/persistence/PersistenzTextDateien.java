@@ -1,17 +1,18 @@
 package Proto.persistence;
 
-import Proto.dijkstra.Projekt;
+import Proto.domain.Project;
 import Proto.domain.Student;
 import Proto.domain.Supervisor;
+import Proto.domain.Verwaltung;
 
 import java.io.File;
 import java.util.*;
 
-public class PersistenzTextDateien implements Persistenz{
+public class PersistenzTextDateien implements Persistenz {
 
 	private String pfad = "data/";
 
-	public Collection<Student> importiereStudenten() {
+	public Collection<Student> importStudents() {
 		Collection<Student> ergebnis = new ArrayList<>();
 		try{
 			Scanner dateiScanner = new Scanner(new File(pfad + "students.txt"));
@@ -49,8 +50,8 @@ public class PersistenzTextDateien implements Persistenz{
 		return ergebnis;
 	}
 	
-	public Collection<Projekt> importiereProjekte(){
-		Collection<Projekt> ergebnis = new ArrayList<>();
+	public Collection<Project> importProjects() {
+		Collection<Project> ergebnis = new ArrayList<>();
 		try{
 			Scanner dateiScanner = new Scanner(new File(pfad + "projects.txt"));
 			while(dateiScanner.hasNext()){
@@ -58,7 +59,7 @@ public class PersistenzTextDateien implements Persistenz{
 				String supervisorSurename, supervisorName;
 				String titel;
 				
-				while(!dateiScanner.hasNextInt()){
+				while(!dateiScanner.hasNextInt()) {
 					dateiScanner.next();
 				}
 				id = dateiScanner.nextInt() - 1;
@@ -68,14 +69,18 @@ public class PersistenzTextDateien implements Persistenz{
 
 				titel = dateiScanner.nextLine();
 				int i = 0;
-				while ((i<titel.length()) && (titel.charAt(i)==' ')){
+				while ((i<titel.length()) && (titel.charAt(i)==' ')) {
 					++i;
 				}
 				titel = titel.substring(i,titel.length());
-				Projekt project = new Projekt(id, titel, maxTeilnehmer);
+				Project project = new Project(id, titel, maxTeilnehmer);
 				ergebnis.add(project);
-				Supervisor supervisor = new Supervisor(supervisorSurename, supervisorName);
-				supervisor.addProject(project);
+				for (Supervisor s: Verwaltung.getSupervisors()) {
+					if (s.getSurename().equals(supervisorSurename) && s.getName().equals(supervisorName)) {
+						s.addProject(project);
+						break;
+					}
+				}
 			}
 			dateiScanner.close();
 		}
@@ -84,7 +89,33 @@ public class PersistenzTextDateien implements Persistenz{
 		}
 		return ergebnis;
 	}
-	
+
+	@Override
+	public Collection<Supervisor> importSupervisors() {
+		Collection<Supervisor> result = new ArrayList<>();
+		try {
+			Scanner dateiScanner = new Scanner(new File(pfad + "projects.txt"));
+			while(dateiScanner.hasNext()){
+				String supervisorSurename, supervisorName;
+
+				dateiScanner.next();
+				dateiScanner.next();
+
+				supervisorSurename = dateiScanner.next();
+				supervisorName = dateiScanner.next();
+				dateiScanner.nextLine();
+
+				Supervisor supervisor = new Supervisor(supervisorSurename, supervisorName);
+				result.add(supervisor);
+			}
+			dateiScanner.close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return result;
+	}
+
 	public void exportiere() {
 		// TODO - implement PersistenzTextDateien.exportiere
 		throw new UnsupportedOperationException();

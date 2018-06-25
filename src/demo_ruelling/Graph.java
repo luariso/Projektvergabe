@@ -27,7 +27,7 @@ public class Graph {
         }
 
         jobData = new ArrayList<Job>();
-        // Für jedes Projekt Arbeitsplätze anlegen
+        // Für jedes Project Arbeitsplätze anlegen
         for (int ip=0; ip<pList.size(); ++ip) {
            PNode p= pList.get(ip);    
            for (int i=1; i<= p.getCapacity(); ++i) {

@@ -2,7 +2,6 @@ package Proto.domain;
 
 import Proto.dijkstra.Graph;
 import Proto.dijkstra.PNode;
-import Proto.dijkstra.Projekt;
 import Proto.dijkstra.SNode;
 import Proto.gui.fx.MainWindow;
 import Proto.gui.swing.SwingGUI;
@@ -12,8 +11,8 @@ import java.util.*;
 
 public class Verwaltung {
 
-	private static Collection<Projekt> projekte = new ArrayList<>();
-	private static Collection<Student> studenten = new ArrayList<>();
+	private static Collection<Project> projects = new ArrayList<>();
+	private static Collection<Student> students = new ArrayList<>();
 	private static Collection<Supervisor> supervisors = new ArrayList<>();
 	
 	private static ArrayList<PNode> pNodes;
@@ -22,41 +21,46 @@ public class Verwaltung {
 	private static SwingGUI gui = new SwingGUI();
 	
 	public static void main(String[] args){
-		importiereProjekte();
-		importiereStudenten();
+		importSupervisors();
+		importProjects();
+		importStudents();
 //		JavaFXGUI.oeffne(args);
 		MainWindow.oeffne(args);
 	}
 	
-	public static void importiereProjekte(){
-		projekte = persistenz.importiereProjekte();
+	public static void importProjects(){
+		projects = persistenz.importProjects();
 	}
 	
-	public static void importiereStudenten(){
-		studenten = persistenz.importiereStudenten();
+	public static void importStudents(){
+		students = persistenz.importStudents();
 	}
-	
+
+	public static void importSupervisors() {
+		supervisors = persistenz.importSupervisors();
+	}
+
 	//Liefert die durchschnittliche Zufriedenheit aller Studenten
 	public static double getDurchschnitt(){
 		double i = 0;
-		for(Student s : studenten){
+		for(Student s : students){
 			i += s.getZufriedenheit();
 		}
-		return i / studenten.size();
+		return i / students.size();
 	}
 	
-	//Liefert das Projekt mit der übergebenen ID
-	public static Projekt getProjekt(int key){
-		for(Projekt p: projekte){
+	//Liefert das Project mit der übergebenen ID
+	public static Project getProjekt(int key){
+		for(Project p: projects){
 			if(key == p.getId()){
 				return p;
 			}
 		}
-		throw new NullPointerException("Es existiert kein Projekt mit der ID " + key);
+		throw new NullPointerException("Es existiert kein Project mit der ID " + key);
 	}
 	
 	public static Student getStudent(int key){
-		for(Student s: studenten){
+		for(Student s: students){
 			if(key == s.getId()){
 				return s;
 			}
@@ -66,7 +70,7 @@ public class Verwaltung {
 	
 	//Erstellt eine Liste von PNodes aus den vorhandenen Projekten mit zufälliger Reihenfolge
 	public static void annonymisiereProjekte(){
-		ArrayList<Projekt> leerend = new ArrayList<>(projekte);
+		ArrayList<Project> leerend = new ArrayList<>(projects);
 		ArrayList<PNode> ergebnis = new ArrayList<>();
 		int zaehler = 0;
 		
@@ -81,7 +85,7 @@ public class Verwaltung {
 	
 	//Erstellt eine Liste von SNodes aus den vorhandenen Studenten mit zufälliger Reihenfolge
 	public static void annonymisiereStudenten(){
-		ArrayList<Student> leerend = new ArrayList<>(studenten);
+		ArrayList<Student> leerend = new ArrayList<>(students);
 		ArrayList<SNode> ergebnis = new ArrayList<>();
 		int zaehler = 0;
 		
@@ -94,7 +98,7 @@ public class Verwaltung {
 		sNodes = ergebnis;
 	}
 	
-	//Wendet den Dijkstra-Algorithmus auf die vorhandenen Listen aus PNodes und SNodes an und ordnet den Studenten ihr Projekt zu
+	//Wendet den Dijkstra-Algorithmus auf die vorhandenen Listen aus PNodes und SNodes an und ordnet den Studenten ihr Project zu
 	//Liefert eine TreeMap mit der annonymen ID des Studenten als Key und der annonymen ID des Projekts als Value
 	public static TreeMap<Integer, Integer> ordne(){
 		annonymisiereProjekte();
@@ -110,7 +114,7 @@ public class Verwaltung {
 		}
 		
 		for(int i = 0; i < zuordnung.size(); ++i){
-			sNodes.get(i).getStudent().setProjekt(pNodes.get(zuordnung.get(i)).getProjekt());
+			sNodes.get(i).getStudent().setProject(pNodes.get(zuordnung.get(i)).getProjekt());
 			pNodes.get(zuordnung.get(i)).getProjekt().addTeilnehmer(sNodes.get(i).getStudent());
 		}
 		
@@ -122,8 +126,8 @@ public class Verwaltung {
 		Object[][] ergebnis;
 		switch(was){
 			case "studenten":
-				ergebnis = new Object[studenten.size()][4];
-				for(Student s : studenten){
+				ergebnis = new Object[students.size()][4];
+				for(Student s : students){
 					int i = s.getId();
 					ergebnis[i][0] = s.getId();
 					ergebnis[i][1] = s.getName();
@@ -132,22 +136,22 @@ public class Verwaltung {
 				}
 				return ergebnis;
 			case "matching":
-				ergebnis = new Object[studenten.size()][6];
-				for(Student s : studenten){
+				ergebnis = new Object[students.size()][6];
+				for(Student s : students){
 						int i = s.getId();
 						ergebnis[i][0] = s.getId();
 						ergebnis[i][1] = s.getName();
 						ergebnis[i][2] = s.getSurename();
 						ergebnis[i][3] = s.getMatrikelNummer();
-						if(s.getProjekt() != null){
-							ergebnis[i][4] = s.getProjekt().getTitel();
+						if(s.getProject() != null){
+							ergebnis[i][4] = s.getProject().getTitel();
 							ergebnis[i][5] = s.getZufriedenheit();
 						}
 				}
 				return ergebnis;
 			case "projekte":
-				ergebnis = new Object[projekte.size()][3];
-				for(Projekt p : projekte){
+				ergebnis = new Object[projects.size()][3];
+				for(Project p : projects){
 					int i = p.getId();
 					ergebnis[i][0] = p.getId();
 					ergebnis[i][1] = p.getTitel();
@@ -158,12 +162,12 @@ public class Verwaltung {
 		throw new IllegalArgumentException("Gueltige Argumente sind 'studenten', 'matching' und 'projekte'");
 	}
 	
-	public static Collection<Projekt> getProjekte(){
-		return projekte;
+	public static Collection<Project> getProjects(){
+		return projects;
 	}
 	
-	public static Collection<Student> getStudenten(){
-		return studenten;
+	public static Collection<Student> getStudents(){
+		return students;
 	}
 
 	public static Collection<Supervisor> getSupervisors(){

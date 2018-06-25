@@ -1,6 +1,5 @@
 package Proto.domain;
 
-import Proto.dijkstra.Projekt;
 import Proto.dijkstra.SNode;
 
 import java.util.*;
@@ -9,7 +8,7 @@ public class Student extends Nutzer {
 	
 	private int id;
 	private ArrayList<Bewertung> bewertungen = new ArrayList<>();
-	private Projekt projekt;
+	private Project project;
 	private String studienfach;
 	private String matrikelNummer;
 	private SNode sNode;
@@ -31,8 +30,8 @@ public class Student extends Nutzer {
 //		if(this.sNode != null){
 //			ergebnis += " " + this.sNode.getId();
 //		}
-//		if(this.projekt != null){
-//			ergebnis += " " + this.projekt.getTitel() +
+//		if(this.project != null){
+//			ergebnis += " " + this.project.getTitel() +
 //					" " + this.getZufriedenheit();
 //
 //		}
@@ -52,7 +51,7 @@ public class Student extends Nutzer {
 		ArrayList<Integer> ergebnis = new ArrayList<>();
 		for(int i = 0; i < bewertungen.size(); ++i){
 			for(Bewertung b : bewertungen){
-				if(b.getProjekt().getPNode().getId() == i){
+				if(b.getProject().getPNode().getId() == i){
 					ergebnis.add(i,b.getNote());
 				}
 			}
@@ -64,8 +63,8 @@ public class Student extends Nutzer {
 		return bewertungen;
 	}
 	
-	public void setProjekt(Projekt projekt){
-		this.projekt = projekt;
+	public void setProject(Project project){
+		this.project = project;
 	}
 	
 	//Schließt die Lücken in der übergebenen Liste (1, 5, 5) -> (1, 2, 2)
@@ -98,12 +97,12 @@ public class Student extends Nutzer {
 		return input;
 	}
 	
-	//Liefert die Note, die der Student dem Projekt gegeben hat, dass ihm zugewiesen wurde
+	//Liefert die Note, die der Student dem Project gegeben hat, dass ihm zugewiesen wurde
 	public int getZufriedenheit(){
-		if(this.projekt == null){
-			throw new NullPointerException("Dem folgenden Studenten wurde kein Projekt zugewiesen:\n" + this);
+		if(this.project == null){
+			throw new NullPointerException("Dem folgenden Studenten wurde kein Project zugewiesen:\n" + this);
 		}
-		return this.bewertungen.get(this.projekt.getId()).getNote();
+		return this.bewertungen.get(this.project.getId()).getNote();
 	}
 	
 	public int getId(){
@@ -118,7 +117,7 @@ public class Student extends Nutzer {
 		return studienfach;
 	}
 	
-	public Projekt getProjekt(){
-		return projekt;
+	public Project getProject(){
+		return project;
 	}
 }

@@ -2,6 +2,7 @@ package Proto.gui.fx;
 
 import Proto.domain.Nutzer;
 import Proto.domain.Student;
+import Proto.domain.Supervisor;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -24,8 +25,8 @@ public class MainWindow extends Application{
     public void login(Nutzer nutzer) {
         if (nutzer.getClass() == Student.class) {
             primaryStage.setScene(new StudentScene((Student) nutzer, this).getScene());
-        } else {
-            // TODO implement
+        } else if (nutzer.getClass() == Supervisor.class){
+            primaryStage.setScene(new SupervisorScene((Supervisor) nutzer, this).getScene());
         }
     }
 

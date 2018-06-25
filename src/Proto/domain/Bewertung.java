@@ -1,29 +1,27 @@
 package Proto.domain;
 
-import Proto.dijkstra.Projekt;
-
 public class Bewertung {
 
 	private Student student;
-	private Projekt projekt;
+	private Project project;
 	private int note;
 	
-	public Bewertung(Student student, Projekt projekt, int note){
+	public Bewertung(Student student, Project project, int note){
 		this.student = student;
-		this.projekt = projekt;
+		this.project = project;
 		this.note = note;
 	}
 	
 	@Override
 	public String toString(){
-		return "(" + projekt.getId() + ", " + note + ")";
+		return "(" + project.getId() + ", " + note + ")";
 	}
 	
 	public int getNote(){
 		return note;
 	}
 	
-	public Projekt getProjekt(){
-		return projekt;
+	public Project getProject(){
+		return project;
 	}
 }

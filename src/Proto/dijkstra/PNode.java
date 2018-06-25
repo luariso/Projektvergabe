@@ -1,10 +1,12 @@
 package Proto.dijkstra;
 
+import Proto.domain.Project;
+
 public class PNode{
 
     private Integer id; 
     private Integer capacity;
-    private Projekt projekt;
+    private Project projekt;
 
     public PNode(Integer id, Integer capacity) {
        this.id = id; 
@@ -15,12 +17,12 @@ public class PNode{
     public Integer getCapacity() { return capacity; }
     public String toString() {return id.toString(); }
     
-    public Projekt getProjekt(){
+    public Project getProjekt(){
         return projekt;
     }
     
-    public void setProjekt(Projekt projekt){
-        this.projekt = projekt;
+    public void setProjekt(Project project){
+        this.projekt = project;
     }
 }
 

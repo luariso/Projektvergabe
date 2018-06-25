@@ -43,7 +43,7 @@ public class JavaFXGUI extends Application {
 
 		TableView<Bewertung> tabelle = new TableView<>();
 
-		TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
+		TableColumn<Bewertung, String> idCol = new TableColumn<>("Project");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
 
 		TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
@@ -114,7 +114,7 @@ public class JavaFXGUI extends Application {
 		TableColumn<Student, String> matrikelCol = new TableColumn<>("Matrikelnummer");
 		matrikelCol.setCellValueFactory(new PropertyValueFactory<>("matrikelNummer"));
 
-		tableView.setItems(FXCollections.observableArrayList(Verwaltung.getStudenten()));
+		tableView.setItems(FXCollections.observableArrayList(Verwaltung.getStudents()));
 		tableView.getColumns().addAll(idCol, vornameCol, nachnameCol, matrikelCol);
 
 		Label ueberschrift = new Label("Studenten");

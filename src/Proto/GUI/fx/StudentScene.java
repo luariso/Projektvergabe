@@ -29,20 +29,19 @@ public class StudentScene {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text sceneTitle = new Text("Student " + student.getVorname() + " " + student.getName());
+        Text sceneTitle = new Text("Student " + student.getName() + " " + student.getSurename());
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(sceneTitle, 0, 0, 2, 1);
-
-        Button save = new Button("Übernehmen");
-        HBox saveBtn = new HBox(10);
-        saveBtn.getChildren().add(save);
-        grid.add(saveBtn, 0, 1);
-        
 
         Button logout = new Button("Logout");
         HBox logoutBtn = new HBox(10);
         logoutBtn.getChildren().add(logout);
         grid.add(logoutBtn, 1, 1);
+
+        Button save = new Button("Übernehmen");
+        HBox saveBtn = new HBox(10);
+        saveBtn.getChildren().add(save);
+        grid.add(saveBtn, 0, 1);
 
         TableView<Bewertung> table = getBewertungsPane(student);
         grid.add(table, 0, 2, 2, 1);
@@ -62,7 +61,7 @@ public class StudentScene {
         TableView<Bewertung> tabelle = new TableView<>();
 
         TableColumn<Bewertung, String> idCol = new TableColumn<>("Projekt");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("projekt"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
         TableColumn<Bewertung, Integer> bewertungCol = new TableColumn<>("Bewetrung (1 - 5)");
         bewertungCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
