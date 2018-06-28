@@ -91,7 +91,7 @@ public class LoginScene {
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
+        grid.add(hbBtn, 1, 5);
         
         grid.setOnKeyReleased(event -> {
             if(event.getCode().toString().equals("ENTER")){
@@ -100,7 +100,7 @@ public class LoginScene {
         });
 
         final Text loginFailed = new Text();
-        grid.add(loginFailed, 1, 6);
+        grid.add(loginFailed, 1, 6, 2, 1);
         btn.setOnAction(event -> okClicked(loginFailed, studentToggle, supervisorToggle, userTextField));
         return grid;
     }
