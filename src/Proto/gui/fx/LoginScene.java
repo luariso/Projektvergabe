@@ -48,7 +48,7 @@ public class LoginScene {
             window.login(user.get());
         } else {
             loginFailed.setFill(Color.FIREBRICK);
-            loginFailed.setText("Benutzername existiert nicht.");
+            loginFailed.setText("Benutzer existiert nicht.");
         }
     }
 

@@ -73,4 +73,8 @@ public class Project {
 	public ArrayList<Student> getMembers(){
 		return members;
 	}
+
+	public void addMember(Student student) {
+		members.add(student);
+	}
 }
