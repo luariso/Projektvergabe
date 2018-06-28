@@ -11,9 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
+// TODO reset Button to reset the matching.
 public class AdminScene{
 	
 	private Scene scene;
@@ -24,6 +26,13 @@ public class AdminScene{
 		BorderPane pane = new BorderPane();
 		pane.setCenter(getStudentsPane());
 		pane.setRight(getProjectsPane());
+
+		Button match = new Button("Vergebe Projekte");
+		HBox machBtn = new HBox(10);
+		machBtn.getChildren().add(match);
+		match.setOnAction(event -> Control.match());
+		pane.setBottom(machBtn);
+
 		pane.autosize();
 		scene = new Scene(pane);
 	}
