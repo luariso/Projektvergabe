@@ -32,7 +32,7 @@ public class SupervisorScene {
 	private Scene scene;
 	private Supervisor supervisor;
 
-	SupervisorScene(Supervisor supervisor, MainWindow window) {
+	SupervisorScene(int stageId, Supervisor supervisor, MainWindow window) {
 		this.supervisor = supervisor;
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.TOP_CENTER);
@@ -62,7 +62,7 @@ public class SupervisorScene {
 		details.setItems(FXCollections.observableArrayList(""));
 		grid.add(details, 0, 4, 2, 1);
 
-		logout.setOnAction(event -> window.logout());
+		logout.setOnAction(event -> window.logout(stageId));
 		projects.setOnMouseClicked(event -> projectSelected(projects.getSelectionModel().getSelectedItem(), details, detailsHeadline));
 
 		scene = new Scene(grid, width, height);
@@ -77,7 +77,7 @@ public class SupervisorScene {
 		}
 
 		if (selectedProject.isPresent()) {
-			headline.setText("Details zu \"" + selectedProject.get().getTitle() + "\":");
+			headline.setText("Teilnehmer von \"" + selectedProject.get().getTitle() + "\":");
 			List<String> members = selectedProject.get().getMembers().stream().map(Student::toString).collect(Collectors.toList());
 			if (members.isEmpty()) {
 				details.setItems(FXCollections.observableArrayList("Das Projekt hat noch keine Teilnehmer"));

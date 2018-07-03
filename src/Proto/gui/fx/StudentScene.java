@@ -22,7 +22,7 @@ public class StudentScene {
     private Student student;
     private MainWindow window;
 
-    public StudentScene(Student student, MainWindow window) {
+    public StudentScene(int stageId, Student student, MainWindow window) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -48,7 +48,7 @@ public class StudentScene {
         grid.add(table, 0, 2, 2, 1);
 
         save.setOnAction(event -> save(table));
-        logout.setOnAction(event -> window.logout());
+        logout.setOnAction(event -> window.logout(stageId));
 
         scene = new Scene(grid, 500, 500);
     }
@@ -61,7 +61,7 @@ public class StudentScene {
     public TableView<Rating> getRatingPane(Student s){
         TableView<Rating> table = new TableView<>();
 
-        TableColumn<Rating, String> idCol = new TableColumn<>("Project");
+        TableColumn<Rating, String> idCol = new TableColumn<>("Projekt");
         idCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
         TableColumn<Rating, Integer> ratingCol = new TableColumn<>("Bewertung (1 - 5)");

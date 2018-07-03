@@ -22,9 +22,11 @@ public class LoginScene {
     private Collection<Admin> admins;
     private Scene scene;
     private MainWindow window;
+    private int stageId;
 
-    LoginScene(MainWindow window) {
-        this.window = window;
+    LoginScene(int stageId, MainWindow window) {
+		this.stageId = stageId;
+    	this.window = window;
         students = Control.getStudents();
         supervisors = Control.getSupervisors();
         admins = Control.getAdmins();
@@ -45,7 +47,7 @@ public class LoginScene {
         }
 
         if(user.isPresent()) {
-            window.login(user.get());
+            window.login(stageId, user.get());
         } else {
             loginFailed.setFill(Color.FIREBRICK);
             loginFailed.setText("Benutzer existiert nicht.");

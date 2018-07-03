@@ -5,6 +5,8 @@ import Proto.domain.Student;
 import Proto.domain.Control;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,8 +22,10 @@ public class AdminScene{
 	
 	private Scene scene;
 	private MainWindow window;
+	private int stageId;
 	
-	public AdminScene(MainWindow window){
+	public AdminScene(int stageId, MainWindow window){
+		this.stageId = stageId;
 		this.window = window;
 		BorderPane pane = new BorderPane();
 		pane.setCenter(getStudentsPane());
