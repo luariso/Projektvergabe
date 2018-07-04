@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//TODO remove unnecessary table columns.
+//TODO fix satisfaction column width
 public class AdminScene {
 	
 	private Scene scene;
@@ -98,7 +98,6 @@ public class AdminScene {
 
 		grid.autosize();
 		scene = new Scene(grid);
-		HBox toolBar = new HBox(10);
 	}
 
 	public static double round(double value, int places) {
@@ -124,6 +123,7 @@ public class AdminScene {
 		TableColumn<Student, String> matriculationCol = new TableColumn<>("Matrikelnummer");
 		matriculationCol.setCellValueFactory(new PropertyValueFactory<>("matriculation"));
 		TableColumn<Student, String> projectCol = new TableColumn<>("Projekt");
+		
 
 		int maxProjLength = 0;
 		for (Project p: Control.getProjects()) {
@@ -134,8 +134,7 @@ public class AdminScene {
 		}
 		projectCol.setPrefWidth(maxProjLength * new Text("a").getLayoutBounds().getWidth());
 		projectCol.setCellValueFactory(new PropertyValueFactory<>("project"));
-		studentsTable.setItems(FXCollections.observableArrayList(Control.getStudents()));
-		studentsTable.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol);
+		
 		TableColumn<Student, String> satisfactionCol = new TableColumn<>("Zufriedenheit");
 		satisfactionCol.setCellValueFactory(e ->{
 			try{
@@ -143,6 +142,9 @@ public class AdminScene {
 			} catch(Exception ex){}
 			return null;
 		});
+		
+		studentsTable.setItems(FXCollections.observableArrayList(Control.getStudents()));
+		studentsTable.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol, satisfactionCol);
 
 		Label title = new Label("Studenten");
 		title.setPadding(new Insets(5, 5, 5, 5));
