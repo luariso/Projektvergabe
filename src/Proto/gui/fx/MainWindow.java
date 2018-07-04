@@ -4,6 +4,8 @@ import Proto.domain.Supervisor;
 import Proto.domain.User;
 import Proto.domain.Student;
 import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -11,9 +13,6 @@ import java.util.List;
 
 public class MainWindow extends Application{
 
-    private Stage primaryStage;
-    private AdminScene adminScene;
-    private static MainWindow singleton;
     private static int numberOfWindows;
     private List<Stage> stages = new ArrayList<>();
 
@@ -24,7 +23,6 @@ public class MainWindow extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	singleton = this;
 
         for (int i = 0; i < numberOfWindows; ++i) {
         	Stage stage = new Stage();

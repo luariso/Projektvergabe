@@ -18,11 +18,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 //TODO remove unnecessary table columns.
-public class AdminScene{
+public class AdminScene {
 	
 	private Scene scene;
 	private MainWindow window;
 	private int stageId;
+	private TableView<Project> projectsTable;
+	private TableView<Student> studentsTable;
 	
 	public AdminScene(int stageId, MainWindow window){
 		this.stageId = stageId;
@@ -64,11 +66,15 @@ public class AdminScene{
 			matchBtn.setDisable(false);
 			resetBtn.setDisable(true);
 			Control.resetMatching();
+			studentsTable.refresh();
+			projectsTable.refresh();
 		});
 		match.setOnAction(event -> {
 			resetBtn.setDisable(false);
 			matchBtn.setDisable(true);
 			Control.match();
+			studentsTable.refresh();
+			projectsTable.refresh();
 		});
 
 		grid.add(buttons, 0, 1);
@@ -89,8 +95,8 @@ public class AdminScene{
 	public Pane getStudentsPane(){
 		BorderPane pane = new BorderPane();
 
-		TableView<Student> tableView = new TableView<>();
-		tableView.setEditable(true);
+		studentsTable = new TableView<>();
+		studentsTable.setEditable(true);
 
 		TableColumn<Student, String> idCol = new TableColumn<>("ID");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -111,20 +117,20 @@ public class AdminScene{
 		}
 		projectCol.setPrefWidth(maxProjLength * new Text("a").getLayoutBounds().getWidth());
 		projectCol.setCellValueFactory(new PropertyValueFactory<>("project"));
-		tableView.setItems(FXCollections.observableArrayList(Control.getStudents()));
-		tableView.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol);
+		studentsTable.setItems(FXCollections.observableArrayList(Control.getStudents()));
+		studentsTable.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol);
 
 		Label title = new Label("Studenten");
 		title.setPadding(new Insets(5, 5, 5, 5));
 		pane.setTop(title);
-		pane.setCenter(tableView);
+		pane.setCenter(studentsTable);
 		return pane;
 	}
 	
 	public Pane getProjectsPane(){
 		BorderPane pane = new BorderPane();
 		
-		TableView<Project>  tableView = new TableView<>();
+		projectsTable = new TableView<>();
 		
 		TableColumn<Project, String> idCol = new TableColumn<>("ID");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -132,13 +138,13 @@ public class AdminScene{
 		titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
 		TableColumn<Project, String> memberCol = new TableColumn<>("Teilnehmer");
 		memberCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getMembers().size() + " von " + e.getValue().getMaxMembers()));
-		tableView.setItems(FXCollections.observableArrayList(Control.getProjects()));
-		tableView.getColumns().addAll(idCol, titleCol, memberCol);
+		projectsTable.setItems(FXCollections.observableArrayList(Control.getProjects()));
+		projectsTable.getColumns().addAll(idCol, titleCol, memberCol);
 		
 		Label title = new Label("Projekte");
 		title.setPadding(new Insets(5, 5, 5, 5));
 		pane.setTop(title);
-		pane.setCenter(tableView);
+		pane.setCenter(projectsTable);
 		pane.setPrefWidth(500);
 		return pane;
 	}
