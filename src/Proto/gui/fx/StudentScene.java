@@ -37,13 +37,13 @@ public class StudentScene {
         Button logout = new Button("Logout");
         HBox logoutBtn = new HBox(10);
         logoutBtn.getChildren().add(logout);
-        grid.add(logoutBtn, 1, 1);
+        grid.add(logoutBtn, 0, 1);
 
         TableView<Rating> table = getRatingPane(student);
         Button save = new Button("Übernehmen");
         HBox saveBtn = new HBox(10);
         saveBtn.getChildren().add(save);
-        grid.add(saveBtn, 0, 1);
+        grid.add(saveBtn, 1, 1);
 
         grid.add(table, 0, 2, 2, 1);
 

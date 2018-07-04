@@ -17,6 +17,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 //TODO remove unnecessary table columns.
 public class AdminScene {
 	
@@ -61,22 +64,6 @@ public class AdminScene {
 		resetBtn.getChildren().add(reset);
 		buttons.getChildren().add(resetBtn);
 
-		resetBtn.setDisable(true);
-		reset.setOnAction(event -> {
-			matchBtn.setDisable(false);
-			resetBtn.setDisable(true);
-			Control.resetMatching();
-			studentsTable.refresh();
-			projectsTable.refresh();
-		});
-		match.setOnAction(event -> {
-			resetBtn.setDisable(false);
-			matchBtn.setDisable(true);
-			Control.match();
-			studentsTable.refresh();
-			projectsTable.refresh();
-		});
-
 		grid.add(buttons, 0, 1);
 
 		GridPane tables = new GridPane();
@@ -88,11 +75,40 @@ public class AdminScene {
 
 		grid.add(tables, 0, 2);
 
+		Text average = new Text("");
+		grid.add(average, 0, 3);
+
+		resetBtn.setDisable(true);
+		reset.setOnAction(event -> {
+			matchBtn.setDisable(false);
+			resetBtn.setDisable(true);
+			Control.resetMatching();
+			average.setText("");
+			studentsTable.refresh();
+			projectsTable.refresh();
+		});
+		match.setOnAction(event -> {
+			resetBtn.setDisable(false);
+			matchBtn.setDisable(true);
+			Control.match();
+			average.setText("Durchschnittlich vergebene Note: " + round(Control.getAverage(), 2));
+			studentsTable.refresh();
+			projectsTable.refresh();
+		});
+
 		grid.autosize();
 		scene = new Scene(grid);
 	}
 
-	public Pane getStudentsPane(){
+	public static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
+	}
+
+	private Pane getStudentsPane(){
 		BorderPane pane = new BorderPane();
 
 		studentsTable = new TableView<>();
@@ -127,7 +143,7 @@ public class AdminScene {
 		return pane;
 	}
 	
-	public Pane getProjectsPane(){
+	private Pane getProjectsPane(){
 		BorderPane pane = new BorderPane();
 		
 		projectsTable = new TableView<>();

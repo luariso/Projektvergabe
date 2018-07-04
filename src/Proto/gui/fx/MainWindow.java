@@ -4,20 +4,28 @@ import Proto.domain.Supervisor;
 import Proto.domain.User;
 import Proto.domain.Student;
 import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.control.TableView;
+
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainWindow extends Application{
+public class MainWindow extends Application {
 
     private static int numberOfWindows;
     private List<Stage> stages = new ArrayList<>();
 
     public static void open(String[] args) {
-    	numberOfWindows = Integer.valueOf(args[0]);
+    	try {
+			numberOfWindows = Integer.valueOf(args[0]);
+			if (numberOfWindows < 1) {
+				numberOfWindows = 1;
+			}
+		} catch (NumberFormatException e) {
+    		throw new IllegalArgumentException("Ungüliger Programm Parameter. Bitte eine Zahl eingeben.");
+		} catch (IndexOutOfBoundsException e) {
+    		numberOfWindows = 1;
+		}
         launch(args);
     }
 
