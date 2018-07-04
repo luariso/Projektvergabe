@@ -32,7 +32,7 @@ public class LoginScene {
         admins = Control.getAdmins();
         GridPane grid = createGridPane();
 
-        scene = new Scene(grid, 300, 275);
+        scene = new Scene(grid, 375, 275);
     }
 
     private void okClicked(Text loginFailed, RadioButton studentToggle, RadioButton supervisorToggle, TextField userName) {

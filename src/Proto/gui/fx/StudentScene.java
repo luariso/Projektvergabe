@@ -1,10 +1,12 @@
 package Proto.gui.fx;
 
+import Proto.domain.Control;
 import Proto.domain.Rating;
 import Proto.domain.Student;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -60,13 +62,18 @@ public class StudentScene {
 
     public TableView<Rating> getRatingPane(Student s){
         TableView<Rating> table = new TableView<>();
+        table.setEditable(true);
 
         TableColumn<Rating, String> idCol = new TableColumn<>("Projekt");
         idCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
         TableColumn<Rating, Integer> ratingCol = new TableColumn<>("Bewertung (1 - 5)");
-        ratingCol.setCellFactory((param) -> new StudentScene.RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
+        ratingCol.setCellFactory((param) -> new RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        ratingCol.setOnEditCommit(
+                t -> t.getTableView().getItems().get(
+                        t.getTablePosition().getRow()).setGrade(t.getNewValue())
+        );
 
         table.setItems(FXCollections.observableArrayList(s.getRatings()));
         table.getColumns().addAll(idCol, ratingCol);

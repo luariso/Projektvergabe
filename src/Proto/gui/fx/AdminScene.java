@@ -22,6 +22,7 @@ import java.math.RoundingMode;
 
 //TODO remove unnecessary table columns.
 public class AdminScene {
+public class AdminScene{
 	
 	private Scene scene;
 	private MainWindow window;
@@ -98,6 +99,30 @@ public class AdminScene {
 
 		grid.autosize();
 		scene = new Scene(grid);
+		HBox toolBar = new HBox(10);
+		match.setOnAction(event -> {
+			Control.match();
+			pane.setCenter(getStudentsPane());
+			pane.setRight(getProjectsPane());
+			match.setDisable(true);
+		});
+		
+		Button reset = new Button("Zurücksetzen");
+		reset.setOnAction( event -> {
+			Control.importProjects();
+			Control.importStudents();
+			pane.setCenter(getStudentsPane());
+			pane.setRight(getProjectsPane());
+			match.setDisable(false);
+		});
+		
+		Button logout = new Button("Logout");
+		logout.setOnAction(event -> window.logout());
+		
+		toolBar.getChildren().addAll(match, reset, logout);
+		pane.setBottom(toolBar);
+		pane.autosize();
+		scene = new Scene(pane, 1300, 600);
 	}
 
 	public static double round(double value, int places) {
@@ -135,6 +160,16 @@ public class AdminScene {
 		projectCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 		studentsTable.setItems(FXCollections.observableArrayList(Control.getStudents()));
 		studentsTable.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol);
+		TableColumn<Student, String> satisfactionCol = new TableColumn<>("Zufriedenheit");
+		satisfactionCol.setCellValueFactory(e ->{
+			try{
+				return new SimpleStringProperty("" + e.getValue().getSatisfaction());
+			} catch(Exception ex){}
+			return null;
+		});
+
+		tableView.setItems(FXCollections.observableArrayList(Control.getStudents()));
+		tableView.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol, satisfactionCol);
 
 		Label title = new Label("Studenten");
 		title.setPadding(new Insets(5, 5, 5, 5));
