@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-// TODO add project description?
 public class SupervisorScene {
 
 	private int width = 500, height = 500, padding = 25;

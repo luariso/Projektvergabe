@@ -5,19 +5,19 @@ import Proto.domain.Student;
 import Proto.domain.Control;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.util.Callback;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
-// TODO reset Button to reset the matching.
+//TODO remove unnecessary table columns.
 public class AdminScene{
 	
 	private Scene scene;
@@ -27,20 +27,55 @@ public class AdminScene{
 	public AdminScene(int stageId, MainWindow window){
 		this.stageId = stageId;
 		this.window = window;
-		BorderPane pane = new BorderPane();
-		pane.setCenter(getStudentsPane());
-		pane.setRight(getProjectsPane());
+
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.CENTER_LEFT);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+
+		Text sceneTitle = new Text("Übersicht der Projektvergabe");
+		sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		grid.add(sceneTitle, 0, 0);
+
+		FlowPane buttons = new FlowPane();
+		buttons.setAlignment(Pos.CENTER_LEFT);
+		buttons.setOrientation(Orientation.HORIZONTAL);
+		buttons.setHgap(10);
+
+		Button logout = new Button("Logout");
+		HBox logoutBtn = new HBox(10);
+		logoutBtn.getChildren().add(logout);
+		logout.setOnAction(event -> window.logout(stageId));
+		buttons.getChildren().add(logoutBtn);
 
 		Button match = new Button("Vergebe Projekte");
 		HBox machBtn = new HBox(10);
 		machBtn.getChildren().add(match);
 		match.setOnAction(event -> Control.match());
-		pane.setBottom(machBtn);
+		buttons.getChildren().add(machBtn);
 
-		pane.autosize();
-		scene = new Scene(pane);
+		Button reset = new Button("Vergabe zurücksetzten");
+		HBox resetBtn = new HBox(10);
+		resetBtn.getChildren().add(reset);
+		reset.setOnAction(event -> Control.resetMatching());
+		buttons.getChildren().add(resetBtn);
+
+		grid.add(buttons, 0, 1);
+
+		GridPane tables = new GridPane();
+		tables.setAlignment(Pos.CENTER_LEFT);
+		tables.setHgap(10);
+
+		tables.add(getStudentsPane(), 0, 0);
+		tables.add(getProjectsPane(), 1, 0);
+
+		grid.add(tables, 0, 2);
+
+		grid.autosize();
+		scene = new Scene(grid);
 	}
-	
+
 	public Pane getStudentsPane(){
 		BorderPane pane = new BorderPane();
 
@@ -56,8 +91,16 @@ public class AdminScene{
 		TableColumn<Student, String> matriculationCol = new TableColumn<>("Matrikelnummer");
 		matriculationCol.setCellValueFactory(new PropertyValueFactory<>("matriculation"));
 		TableColumn<Student, String> projectCol = new TableColumn<>("Projekt");
-		projectCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 
+		int maxProjLength = 0;
+		for (Project p: Control.getProjects()) {
+			int projLength = p.getTitle().length();
+			if (projLength > maxProjLength) {
+				maxProjLength = projLength;
+			}
+		}
+		projectCol.setPrefWidth(maxProjLength * new Text("a").getLayoutBounds().getWidth());
+		projectCol.setCellValueFactory(new PropertyValueFactory<>("project"));
 		tableView.setItems(FXCollections.observableArrayList(Control.getStudents()));
 		tableView.getColumns().addAll(idCol, nameCol, surnameCol, matriculationCol, projectCol);
 

@@ -115,7 +115,7 @@ public class Control{
 		
 		for(int i = 0; i < matching.size(); ++i){
 			sNodes.get(i).getStudent().setProject(pNodes.get(matching.get(i)).getProject());
-			pNodes.get(matching.get(i)).getProject().addTeilnehmer(sNodes.get(i).getStudent());
+			pNodes.get(matching.get(i)).getProject().addMember(sNodes.get(i).getStudent());
 		}
 		
 		return matching;
@@ -176,5 +176,14 @@ public class Control{
 	
 	public static Collection<Admin> getAdmins(){
 		return admins;
+	}
+
+	public static void resetMatching() {
+		for (Student s: students) {
+			s.setProject(null);
+		}
+		for (Project p: projects) {
+			p.resetMembers();
+		}
 	}
 }

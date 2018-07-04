@@ -63,7 +63,7 @@ public class Project {
 		return maxMembers;
 	}
 	
-	public void addTeilnehmer(Student s){
+	public void addMember(Student s){
 		if(members.contains(s)){
 			throw new IllegalArgumentException("Der Student " + s + " ist bereits Teilnehmer dieses Projekts.");
 		}
@@ -74,7 +74,7 @@ public class Project {
 		return members;
 	}
 
-	public void addMember(Student student) {
-		members.add(student);
+	public void resetMembers() {
+		members = new ArrayList<>();
 	}
 }
