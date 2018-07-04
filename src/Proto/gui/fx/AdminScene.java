@@ -50,16 +50,26 @@ public class AdminScene{
 		buttons.getChildren().add(logoutBtn);
 
 		Button match = new Button("Vergebe Projekte");
-		HBox machBtn = new HBox(10);
-		machBtn.getChildren().add(match);
-		match.setOnAction(event -> Control.match());
-		buttons.getChildren().add(machBtn);
+		HBox matchBtn = new HBox(10);
+		matchBtn.getChildren().add(match);
+		buttons.getChildren().add(matchBtn);
 
 		Button reset = new Button("Vergabe zurücksetzten");
 		HBox resetBtn = new HBox(10);
 		resetBtn.getChildren().add(reset);
-		reset.setOnAction(event -> Control.resetMatching());
 		buttons.getChildren().add(resetBtn);
+
+		resetBtn.setDisable(true);
+		reset.setOnAction(event -> {
+			matchBtn.setDisable(false);
+			resetBtn.setDisable(true);
+			Control.resetMatching();
+		});
+		match.setOnAction(event -> {
+			resetBtn.setDisable(false);
+			matchBtn.setDisable(true);
+			Control.match();
+		});
 
 		grid.add(buttons, 0, 1);
 
