@@ -49,16 +49,10 @@ public class StudentScene {
 
         grid.add(table, 0, 2, 2, 1);
 
-        save.setOnAction(event -> save(table));
         logout.setOnAction(event -> window.logout(stageId));
 
         scene = new Scene(grid, 500, 500);
     }
-
-    private void save(TableView<Rating> table) {
-        // TODO implement
-    }
-
 
     public TableView<Rating> getRatingPane(Student s){
         TableView<Rating> table = new TableView<>();
