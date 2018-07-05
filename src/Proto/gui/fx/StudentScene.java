@@ -48,6 +48,11 @@ public class StudentScene {
         grid.add(saveBtn, 1, 1);
 
         grid.add(table, 0, 2, 2, 1);
+        
+        if(student.getProject() != null){
+            Text givenProject = new Text("Erhaltenes Projekt: " + student.getProject());
+            grid.add(givenProject, 0, 3);
+        }
 
         logout.setOnAction(event -> window.logout(stageId));
 
@@ -65,7 +70,7 @@ public class StudentScene {
         ratingCol.setCellFactory((param) -> new RadioButtonCell<>(new Integer[]{1, 2, 3, 4, 5}));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
         ratingCol.setOnEditCommit(
-                t -> t.getTableView().getItems().get(
+               t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setGrade(t.getNewValue())
         );
 
