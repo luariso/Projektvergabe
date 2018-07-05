@@ -1,12 +1,10 @@
 package Proto.gui.fx;
 
-import Proto.domain.Control;
 import Proto.domain.Rating;
 import Proto.domain.Student;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,6 +23,7 @@ public class StudentScene {
     private MainWindow window;
 
     public StudentScene(int stageId, Student student, MainWindow window) {
+        this.student = student;
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -42,19 +41,20 @@ public class StudentScene {
         grid.add(logoutBtn, 0, 1);
 
         TableView<Rating> table = getRatingPane(student);
-        Button save = new Button("Übernehmen");
-        HBox saveBtn = new HBox(10);
-        saveBtn.getChildren().add(save);
-        grid.add(saveBtn, 1, 1);
+
+        Button refresh = new Button("Aktualisieren");
+        HBox refreshBtn = new HBox(10);
+        refreshBtn.getChildren().add(refresh);
+        grid.add(refreshBtn, 1, 1);
 
         grid.add(table, 0, 2, 2, 1);
         
-        if(student.getProject() != null){
-            Text givenProject = new Text("Erhaltenes Projekt: " + student.getProject());
-            grid.add(givenProject, 0, 3);
-        }
-
+        Text givenProject = new Text(getAssignedProject());
+        grid.add(givenProject, 0, 3, 2, 1);
+        
         logout.setOnAction(event -> window.logout(stageId));
+        refresh.setOnAction(event -> givenProject.setText(getAssignedProject()));
+        
 
         scene = new Scene(grid, 500, 500);
     }
@@ -79,6 +79,17 @@ public class StudentScene {
 
         table.setPrefWidth(450);
         return table;
+    }
+
+    public String getAssignedProject() {
+        String text = "Erhaltenes Projekt: ";
+        if (student.getProject() == null) {
+            text += "Die Projektvergaebe wurde noch nicht durchgeführt.";
+        }
+        else {
+            text += student.getProject().toString();
+        }
+        return text;
     }
 
     public static class RadioButtonCell<S, T> extends TableCell<S, T> {
