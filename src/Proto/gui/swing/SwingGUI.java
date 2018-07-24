@@ -15,7 +15,7 @@ public class SwingGUI{
 	private String[] studentenUeberschriften = new String[]{"ID", "Vorname", "Nachname", "Matrikelnummer", "Project", "Zufriedenheit"};
 	private String[] projektUeberschriften = new String[]{"ID", "Titel", "Plätze"};
 	private JScrollPane studentenTabelle = getTabelle(studentenUeberschriften , Control.present("matching"));
-	private JScrollPane projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
+	private JScrollPane projektTabelle = getTabelle(projektUeberschriften, Control.present("projects"));
 	public void oeffne(){
 		frame.add(getMenu());
 		frame.pack();
@@ -76,7 +76,7 @@ public class SwingGUI{
 			studentenTabelle = getTabelle(studentenUeberschriften, Control.present("matching"));
 			studentenPanel.add(studentenTabelle);
 			projektPanel.remove(projektTabelle);
-			projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
+			projektTabelle = getTabelle(projektUeberschriften, Control.present("projects"));
 			projektPanel.add(projektTabelle);
 			frame.repaint();
 		});
@@ -101,7 +101,7 @@ public class SwingGUI{
 			Control.importProjects();
 			importiereStudenten.setEnabled(true);
 			projektPanel.remove(projektTabelle);
-			projektTabelle = getTabelle(projektUeberschriften, Control.present("projekte"));
+			projektTabelle = getTabelle(projektUeberschriften, Control.present("projects"));
 			projektPanel.add(projektTabelle);
 			frame.repaint();
 		});

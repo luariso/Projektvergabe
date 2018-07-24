@@ -20,7 +20,6 @@ import javafx.scene.text.Text;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//TODO fix satisfaction column width
 public class AdminScene {
 	
 	private Scene scene;
@@ -34,7 +33,7 @@ public class AdminScene {
 		this.window = window;
 
 		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER_LEFT);
+		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));

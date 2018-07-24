@@ -10,12 +10,14 @@ import java.util.*;
 
 public class PersistenceTextFiles implements Persistence{
 
-	private String path = "data/";
+	private final String path = "data/";
+	private final String studentsFile = path + "students.txt";
+	private final String projectsFile = path + "projects.txt";
 
 	public Collection<Student> importStudents() {
 		Collection<Student> result = new ArrayList<>();
 		try{
-			Scanner fileScanner = new Scanner(new File(path + "students.txt"));
+			Scanner fileScanner = new Scanner(new File(studentsFile));
 			while(fileScanner.hasNext()){
 				Integer id = null;
 				String surname = null, name = null, matricleNumber = null;
@@ -53,7 +55,7 @@ public class PersistenceTextFiles implements Persistence{
 	public Collection<Project> importProjects() {
 		Collection<Project> ergebnis = new ArrayList<>();
 		try{
-			Scanner dateiScanner = new Scanner(new File(path + "projects.txt"));
+			Scanner dateiScanner = new Scanner(new File(projectsFile));
 			while(dateiScanner.hasNext()){
 				Integer id, maxMembers;
 				String supervisorSurename, supervisorName;
