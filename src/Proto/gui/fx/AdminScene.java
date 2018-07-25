@@ -90,6 +90,7 @@ public class AdminScene {
 			resetBtn.setDisable(false);
 			matchBtn.setDisable(true);
 			Control.match();
+			Control.exportMatching();
 			average.setText("Durchschnittlich vergebene Note: " + round(Control.getAverage(), 2));
 			studentsTable.refresh();
 			projectsTable.refresh();

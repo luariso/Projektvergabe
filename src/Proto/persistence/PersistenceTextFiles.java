@@ -5,7 +5,10 @@ import Proto.domain.Project;
 import Proto.domain.Student;
 import Proto.domain.Supervisor;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class PersistenceTextFiles implements Persistence{
@@ -120,9 +123,15 @@ public class PersistenceTextFiles implements Persistence{
 		return result;
 	}
 	
-	public void exportiere() {
-		// TODO - implement PersistenceTextFiles.exportiere
-		throw new UnsupportedOperationException();
+	public void exportMatching(String out) {
+		File file = new File(path + "matching.txt");
+		try{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(out);
+			writer.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 
 }

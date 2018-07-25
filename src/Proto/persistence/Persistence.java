@@ -14,5 +14,5 @@ public interface Persistence{
 
 	Collection<Supervisor> importSupervisors();
 
-	void exportiere();
+	void exportMatching(String out);
 }

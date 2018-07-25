@@ -40,6 +40,17 @@ public class Control{
 		students = persistence.importStudents();
 	}
 	
+	public static void exportMatching(){
+		StringBuilder out = new StringBuilder();
+		for(Project p : projects){
+			for(Student s : p.getMembers()){
+				out.append(s.getId()).append("\t").append(s.getSurname()).append("\t").append(s.getName()).append("\t").append(s.getMatriculation());
+				out.append("\t").append(p.getId()).append("\t").append(p.getTitle()).append("\n");
+			}
+		}
+		persistence.exportMatching(out.toString());
+	}
+	
 	//Liefert die durchschnittliche Zufriedenheit aller Studenten
 	public static double getAverage(){
 		double i = 0;
